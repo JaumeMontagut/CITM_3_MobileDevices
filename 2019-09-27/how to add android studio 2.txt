@@ -1,0 +1,3 @@
+nexus 4
+oreo
+uncheck "Enable Device Frame"

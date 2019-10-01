@@ -1,0 +1,10 @@
+open android studio
+don't import settings
+custom install
+uncheck the two last boxes
+install
+configuration
+avd (android virtual device) manager
+pixel 2
+x86 tab
+x86_64 Google API

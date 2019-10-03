@@ -30,51 +30,38 @@ class App extends StatelessWidget {
         body: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  color: Colors.pink,
-                  child: Center(
-                    child: Text(
-                      "20%",
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                ),
-                flex: 20,
-              ),
-              Expanded(
-                child: Container(
-                  color: Colors.purple,
-                  child: Center(
-                    child: Text(
-                      "30%",
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                ),
-                flex: 30,
-              ),
-              Expanded(
-                child: Container(
-                  color: Colors.blue,
-                  child: Center(
-                    child: Text(
-                      "50%",
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                ),
-                flex: 50,
-              ),
+              Band(20, Color.pink),
+              Band(30, Color.red),
+              Band(50, Color.blue)
             ]),
         backgroundColor: Colors.yellow,
       ),
+    );
+  }
+}
+
+class Band extends StatelessWidget {
+
+  int percent;
+  Color color;
+
+  Band(this.percent, this.color);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        color: color,
+        child: Center(
+          child: Text(
+            percent.toString(),
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
+        ),
+      ),
+      flex: percent,
     );
   }
 }

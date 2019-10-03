@@ -30,9 +30,9 @@ class App extends StatelessWidget {
         body: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Band(20, Color.pink),
-              Band(30, Color.red),
-              Band(50, Color.blue)
+              Band(20, Colors.pink),
+              Band(30, Colors.red),
+              Band(50, Colors.blue)
             ]),
         backgroundColor: Colors.yellow,
       ),

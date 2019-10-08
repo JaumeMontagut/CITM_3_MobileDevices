@@ -1,21 +1,119 @@
 import 'package:flutter/material.dart';
+import 'package:lamp/lamp.dart';
 
 void main() {
   runApp(
-    Exercice04(),
+    CalendarExercice(),
   );
 }
 
-class Exercice04 extends StatelessWidget {
-  const Exercice04({
-    Key key,
-  }) : super(key: key);
-  
+class CalendarExercice extends StatefulWidget {
+  @override
+  _CalendarExerciceState createState() => _CalendarExerciceState();
+}
+
+class _CalendarExerciceState extends State<CalendarExercice> {
+  bool isOn = false;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:Scaffold(body : StadiumBorder(side: BorderSide)
+      home: Scaffold(
+        backgroundColor: Colors.grey[100],
+        body: Container(
+          decoration: ShapeDecoration(
+            shape : RoundedRectangleBorder(),
+            gradient: RadialGradient(
+              colors: [
+                Colors.blue[100],
+                Colors.blue[400],
+                Colors.purple[500],
+              ],
+            ),
+          ),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                DayWidget(),
+              ],
+            ),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            if (isOn) {
+              Lamp.turnOff();
+              isOn = false;
+            } else {
+              Lamp.turnOn();
+              isOn = true;
+            }
+          }
+        ),
+      ),
     );
+  }
+}
+
+class DayWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 50,
+      height: 100,
+      decoration: ShapeDecoration(
+        shape: StadiumBorder(),
+        gradient: LinearGradient(
+          colors: [
+            Colors.blue[100],
+            Colors.blue[400],
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+    );
+  }
+}
+
+// class Exercice04 extends StatelessWidget {
+//   const Exercice04({
+//     Key key,
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home:Scaffold(body : StadiumBorder(side: BorderSide)
+//     );
+//   }
+// }
+
+//Exercici03
+class Exercice03 extends StatelessWidget {
+  const Exercice03({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(
+            backgroundColor: Colors.yellow,
+            body: Center(
+                child: Row(
+              children: <Widget>[
+                Container(
+                    width: 50,
+                    height: 50,
+                    decoration: ShapeDecoration(
+                      color: Colors.red,
+                      shape: CircleBorder(),
+                    ),
+                    child: Center(child: Text('0'))),
+              ],
+            ))));
   }
 }
 

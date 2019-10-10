@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:lamp/lamp.dart';
+import 'package:examples/movie.dart';
 
 void main() {
   runApp(
-    CalendarExercice(),
+    MovieAppData(),
   );
 }
+
+class MovieAppData extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      Movie movie = lotr;
+      return MaterialApp(theme : ThemeData(brigth),)
+    );
+  }
+}
+
+//10/10/2019
 
 class CalendarExercice extends StatefulWidget {
   @override

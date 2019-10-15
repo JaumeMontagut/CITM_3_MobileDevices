@@ -1,66 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:lamp/lamp.dart';
+import 'package:examples/movie.dart';
 
 void main() {
-  runApp(ExpandableTextExercice());
+  runApp(
+    MovieAppData(),
+  );
 }
 
-//15/10/2019
-
-class ExpandableTextExercice extends StatelessWidget {
+class MovieAppData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: ExpandableText(),
-    ));
-  }
-}
-
-class ExpandableText extends StatefulWidget {
-  static final int maxLinesExpanded = 100;
-  static final int maxLinesCompressed = 10;
-
-  @override
-  _ExpandableTextState createState() => _ExpandableTextState();
-}
-
-class _ExpandableTextState extends State<ExpandableText> {
-  String textString =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur gravida eros, ut ullamcorper tortor molestie eget. Duis sit amet tincidunt nisi, sed blandit nisl. Ut iaculis, sem quis fermentum consequat, leo quam hendrerit sapien, eu tempor justo erat sit amet purus. Proin id quam vitae velit finibus molestie vel eget enim. Praesent mattis lacus velit, sed vestibulum sapien luctus et. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec nec elit sodales, pulvinar felis eget, egestas neque. Phasellus egestas, quam eget cursus pretium, magna metus luctus nulla, cursus dapibus augue neque sed velit. Aliquam sagittis lacus nec nisl pretium porttitor. In aliquet felis a nibh tempor hendrerit. Pellentesque velit justo, lobortis eu tellus a, facilisis luctus augue.";
-
-  bool expanded = false;
-
-  int currMaxLines = ExpandableText.maxLinesExpanded;
-
-  void expandText() {
-    setState(() {
-      expanded = !expanded;
-      currMaxLines = expanded
-          ? ExpandableText.maxLinesExpanded
-          : ExpandableText.maxLinesCompressed;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          textString,
-          maxLines: currMaxLines,
-        ),
-        FlatButton(
-            onPressed: expandText,
-            child: Container(
-              color: Colors.yellow,
-              child: Text(
-                "Button",
-              ),
-            ),
-            color: Colors.blue),
-      ],
+    return Container(
+      Movie movie = lotr;
+      return MaterialApp(theme : ThemeData(brigth),)
     );
   }
 }
@@ -82,7 +35,7 @@ class _CalendarExerciceState extends State<CalendarExercice> {
         backgroundColor: Colors.grey[100],
         body: Container(
           decoration: ShapeDecoration(
-            shape: RoundedRectangleBorder(),
+            shape : RoundedRectangleBorder(),
             gradient: RadialGradient(
               colors: [
                 Colors.blue[100],
@@ -100,15 +53,17 @@ class _CalendarExerciceState extends State<CalendarExercice> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          if (isOn) {
-            Lamp.turnOff();
-            isOn = false;
-          } else {
-            Lamp.turnOn();
-            isOn = true;
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            if (isOn) {
+              Lamp.turnOff();
+              isOn = false;
+            } else {
+              Lamp.turnOn();
+              isOn = true;
+            }
           }
-        }),
+        ),
       ),
     );
   }

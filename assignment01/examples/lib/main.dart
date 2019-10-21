@@ -31,21 +31,27 @@ class ShopApp extends StatelessWidget {
                         topRight: Radius.circular(30),
                       ),
                     ),
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Divider(
-                          thickness: 3,
-                          indent: 150,
-                          endIndent: 150,
-                        ),
-                        SizedBox(height: 10,),
-                        Text(
-                          "Bodycon Dress",
-                        ),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8, right: 20, left: 20, bottom: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Divider(
+                            thickness: 3,
+                            indent: 135,
+                            endIndent: 135,
+                          ),
+                          SizedBox(height: 10,),
+                          Text(
+                            "Bodycon Dress",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 )

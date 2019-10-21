@@ -22,18 +22,35 @@ class ShopApp extends StatelessWidget {
                   //TOREMOVE: Transparent container, a litte bit dirty
                 ),
                 Expanded(
-                    flex: 6,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                        ),
+                  flex: 6,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
                       ),
-                    ))
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Divider(
+                          thickness: 3,
+                          indent: 150,
+                          endIndent: 150,
+                        ),
+                        SizedBox(height: 10,),
+                        Text(
+                          "Bodycon Dress",
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               ],
-            )
+            ),
           ],
         ),
       ),

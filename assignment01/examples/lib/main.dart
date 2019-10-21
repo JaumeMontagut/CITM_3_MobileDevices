@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(
-    ShopApp()
-  );
+  runApp(ShopApp());
 }
 
 class ShopApp extends StatelessWidget {
@@ -11,7 +9,22 @@ class ShopApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Container(color : Colors.blue),
+        body: Center(
+          child: Container(
+            color: Colors.yellow,
+            // child : Icon(
+            //   Icons.arrow_back_ios,
+            //   color : Colors.pink,
+            //   size : 24.0
+            // )
+            // child: Icon(
+            //   Icons.shopping_cart,
+            //   color: Colors.pink,
+            //   size: 24.0,
+            //   semanticLabel: 'Text to announce in acessibility modes',
+            // ),
+          ),
+        ),
       ),
     );
   }

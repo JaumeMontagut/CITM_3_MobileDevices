@@ -23,9 +23,10 @@ class CustomTextStyle {
     );
   }
 
-  static TextStyle buttonStyle() {
+  static TextStyle buttonStyle(Color color) {
     return TextStyle(
       fontFamily: 'Poppins',
+      color: color,
       fontSize: 15,
     );
   }
@@ -50,8 +51,9 @@ class CustomTextStyle {
 
 class ClothesSizeButton extends StatelessWidget {
   final int clothesSize;
+  final bool selected;
 
-  ClothesSizeButton(this.clothesSize);
+  ClothesSizeButton(this.clothesSize, this.selected);
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +62,17 @@ class ClothesSizeButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(5)),
         border: Border.all(
-          color: Colors.grey[300],
+          color: selected ? Colors.grey[900] : Colors.grey[300],
           width: 1.0,
         ),
+        color: selected ? Colors.grey[900] : null,
       ),
       child: Center(
         child: Text(
           clothesSize.toString(),
           textAlign: TextAlign.center,
-          style: CustomTextStyle.buttonStyle(),
+          style: CustomTextStyle.buttonStyle(
+              selected ? Colors.white : Colors.grey[900]),
         ),
       ),
     );
@@ -76,6 +80,10 @@ class ClothesSizeButton extends StatelessWidget {
 }
 
 class ClothesSizeListView extends StatelessWidget {
+  final int selectedNum;
+
+  ClothesSizeListView(this.selectedNum);
+
   @override
   Widget build(BuildContext context) {
     List<Widget> clothesSizeListView = new List<Widget>();
@@ -86,6 +94,7 @@ class ClothesSizeListView extends StatelessWidget {
       clothesSizeListView.add(
         ClothesSizeButton(
           redShirt.sizes[i],
+          i == selectedNum,
         ),
       );
       clothesSizeListView.add(
@@ -114,7 +123,7 @@ class ShopApp extends StatelessWidget {
               redShirt.imagePath,
               height: double.infinity,
               width: double.infinity,
-              fit: BoxFit.fitHeight,
+              fit: BoxFit.cover,
             ),
             ListView(
               children: <Widget>[
@@ -286,7 +295,7 @@ class BottomPanel extends StatelessWidget {
           ),
           Container(
             height: 40,
-            child: ClothesSizeListView(),
+            child: ClothesSizeListView(0),
           ),
           SizedBox(
             height: 20,

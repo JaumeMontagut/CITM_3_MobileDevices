@@ -23,10 +23,19 @@ class CustomTextStyle {
     );
   }
 
-  static TextStyle buttonStyle(){
+  static TextStyle buttonStyle() {
     return TextStyle(
       fontFamily: 'Poppins',
       fontSize: 20,
+    );
+  }
+
+  static TextStyle locationStyle(Color color) {
+    return TextStyle(
+      fontFamily: 'Poppins',
+      color: color,
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
     );
   }
 
@@ -66,17 +75,15 @@ class SizeButton extends StatelessWidget {
   }
 }
 
-class SizeButtonRow extends StatelessWidget
-{
+class SizeButtonRow extends StatelessWidget {
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     List<Widget> sizedButtonList = new List<Widget>();
-    for(var i = 0; i < redShirt.sizes.length; ++i){
+    for (var i = 0; i < redShirt.sizes.length; ++i) {
       sizedButtonList.add(SizeButton(redShirt.sizes[i]));
     }
     //TODO: Add space between buttons
-    return Row(children:sizedButtonList);
+    return Row(children: sizedButtonList);
   }
 }
 
@@ -94,14 +101,18 @@ class ShopApp extends StatelessWidget {
         body: Stack(
           children: <Widget>[
             Image.asset(
-              'assets/images/clothes.png',
+              redShirt.imagePath,
+              //scale : 0.5,
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.fitHeight,
             ),
             Column(
               children: <Widget>[
                 Expanded(
                   flex: 4,
                   child: Container(),
-                  //TOREMOVE: Transparent container, a litte bit dirty
+                  //TODO: Remove transparent container, a litte bit dirty
                 ),
                 Expanded(
                   flex: 6,
@@ -155,6 +166,58 @@ class ShopApp extends StatelessWidget {
                             height: 10,
                           ),
                           SizeButtonRow(),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                "DELIVERING TO ",
+                                style: CustomTextStyle.locationStyle(
+                                    Colors.grey[800]),
+                              ),
+                              Text(
+                                redShirt.location.toUpperCase(),
+                                style:
+                                    CustomTextStyle.locationStyle(Colors.blue),
+                              ),
+                              Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.blue,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                flex: 3,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      bottomLeft: Radius.circular(30),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(30),
+                                      bottomRight: Radius.circular(30),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),

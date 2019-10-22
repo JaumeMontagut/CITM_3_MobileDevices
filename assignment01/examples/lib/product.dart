@@ -1,5 +1,5 @@
 class Product {
-  String name, description, location;
+  String name, description, location, imagePath;
   List<int> sizes;
   double price;
 
@@ -9,6 +9,7 @@ class Product {
     this.location,
     this.sizes,
     this.price,
+    this.imagePath
   );
 }
 
@@ -18,4 +19,5 @@ final Product redShirt = Product(
   'New Lane 129, CA',
   [31, 32, 33, 34, 35],
   80,
+  'assets/images/clothes.png'
 );

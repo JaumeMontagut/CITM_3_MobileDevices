@@ -18,15 +18,15 @@ class CustomTextStyle {
     return TextStyle(
       fontFamily: 'Poppins',
       fontWeight: FontWeight.bold,
-      fontSize: 18,
-      color: Colors.grey[800],
+      fontSize: 17,
+      color: Colors.grey[850],
     );
   }
 
   static TextStyle buttonStyle() {
     return TextStyle(
       fontFamily: 'Poppins',
-      fontSize: 20,
+      fontSize: 15,
     );
   }
 
@@ -42,22 +42,21 @@ class CustomTextStyle {
   static TextStyle regularStyle() {
     return TextStyle(
       fontFamily: 'Poppins',
-      fontSize: 12,
+      fontSize: 11,
       color: Colors.grey[600],
     );
   }
 }
 
 class ClothesSizeButton extends StatelessWidget {
-  final int size;
+  final int clothesSize;
 
-  ClothesSizeButton(this.size);
+  ClothesSizeButton(this.clothesSize);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 90,
-      height: 45,
+      width: 68,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(5)),
         border: Border.all(
@@ -67,8 +66,9 @@ class ClothesSizeButton extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          size.toString(),
+          clothesSize.toString(),
           textAlign: TextAlign.center,
+          style: CustomTextStyle.buttonStyle(),
         ),
       ),
     );
@@ -78,16 +78,24 @@ class ClothesSizeButton extends StatelessWidget {
 class ClothesSizeListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Widget> sizedButtonList = new List<Widget>();
+    List<Widget> clothesSizeListView = new List<Widget>();
+    clothesSizeListView.add(
+      SizedBox(width: 20),
+    );
     for (var i = 0; i < redShirt.sizes.length; ++i) {
-      sizedButtonList.add(
+      clothesSizeListView.add(
         ClothesSizeButton(
           redShirt.sizes[i],
         ),
       );
+      clothesSizeListView.add(
+        SizedBox(
+          width: 15,
+        ),
+      );
     }
     return ListView(
-      children: sizedButtonList,
+      children: clothesSizeListView,
       scrollDirection: Axis.horizontal,
     );
   }
@@ -111,7 +119,7 @@ class ShopApp extends StatelessWidget {
             ListView(
               children: <Widget>[
                 SizedBox(
-                  height: 500,
+                  height: 480,
                 ),
                 BottomPanel(),
               ],
@@ -155,7 +163,7 @@ class ShoppingCart extends StatelessWidget {
                 height: 12,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.blue,
+                  color: Colors.blue[700],
                 ),
                 child: Center(
                   child: Text(
@@ -190,13 +198,15 @@ class BackButton extends StatelessWidget {
           Icon(
             Icons.arrow_back_ios,
             color: Colors.grey[1000],
-            size: 24.0,
+            size: 16.0,
           ),
           Text(
             "Back",
             style: TextStyle(
               color: Colors.grey[1000],
+              fontSize: 12,
               fontWeight: FontWeight.bold,
+              fontFamily: 'Poppins',
             ),
           ),
         ],
@@ -206,6 +216,8 @@ class BackButton extends StatelessWidget {
 }
 
 class BottomPanel extends StatelessWidget {
+  static const double paddingSize = 20;
+
   const BottomPanel({
     Key key,
   }) : super(key: key);
@@ -223,112 +235,167 @@ class BottomPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Divider(
-            thickness: 3,
-            indent: 135,
-            endIndent: 135,
-          ),
           SizedBox(
             height: 10,
           ),
-          Text(
-            redShirt.name,
-            style: CustomTextStyle.titleStyle(),
-            textAlign: TextAlign.left,
+          Divider(
+              thickness: 3,
+              indent: 162,
+              endIndent: 162,
+              color: Colors.grey[500]),
+          SizedBox(
+            height: 18,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: paddingSize,
+            ),
+            child: Text(
+              redShirt.name,
+              style: CustomTextStyle.titleStyle(),
+              textAlign: TextAlign.left,
+            ),
           ),
           SizedBox(
             height: 8,
           ),
-          Text(
-            redShirt.description,
-            style: CustomTextStyle.regularStyle(),
-            maxLines: 4,
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: paddingSize,
+            ),
+            child: Text(
+              redShirt.description,
+              style: CustomTextStyle.regularStyle(),
+              maxLines: 4,
+            ),
           ),
           SizedBox(
             height: 20,
           ),
-          Text(
-            "Select Size",
-            style: CustomTextStyle.title01Style(),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: paddingSize,
+            ),
+            child: Text(
+              "Select Size",
+              style: CustomTextStyle.title01Style(),
+            ),
           ),
           SizedBox(
             height: 15,
           ),
-          //SizeButtonRow(),
           Container(
-            width: 100,
-            height: 50,
+            height: 40,
             child: ClothesSizeListView(),
           ),
           SizedBox(
             height: 20,
           ),
-          Row(
-            children: <Widget>[
-              Text(
-                "DELIVERING TO ",
-                style: CustomTextStyle.locationStyle(Colors.grey[800]),
-              ),
-              Text(
-                redShirt.location.toUpperCase(),
-                style: CustomTextStyle.locationStyle(Colors.blue),
-              ),
-              Icon(
-                Icons.arrow_drop_down,
-                color: Colors.blue,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: paddingSize),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.attach_money,
-                          size: 20,
-                        ),
-                        Text(
-                          redShirt.price.toString(),
-                          //style: FontStyle(color : color.white),
-                        ),
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.blue[300],
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        bottomLeft: Radius.circular(15),
-                      ),
-                    ),
-                  ),
+                Text(
+                  "DELIVERING TO ",
+                  style: CustomTextStyle.locationStyle(Colors.grey[800]),
                 ),
-                Expanded(
-                  flex: 7,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.blue[700],
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      ),
-                    ),
-                  ),
+                Text(
+                  redShirt.location.toUpperCase(),
+                  style: CustomTextStyle.locationStyle(Colors.blue[700]),
+                ),
+                Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.blue,
                 ),
               ],
             ),
-          )
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: paddingSize),
+            child: Container(
+              width: 100,
+              height: 50,
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Expanded(
+                    flex: 35,
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.attach_money,
+                            size: 13,
+                            color: Colors.white,
+                          ),
+                          Text(
+                            redShirt.price.toString(),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontFamily: 'Poppins',
+                            ),
+                          ),
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.blue[300],
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          bottomLeft: Radius.circular(15),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 65,
+                    child: Container(
+                      padding: EdgeInsets.all(
+                        8.0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Text(
+                            "Add To Cart",
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 12,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.blue[700],
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
         ],
       ),
     );

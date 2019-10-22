@@ -1,3 +1,4 @@
+import 'package:examples/product.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -5,6 +6,12 @@ void main() {
 }
 
 class ShopApp extends StatelessWidget {
+  final int itemsOnShoppingCart = 3;
+  // final TextStyle titleStyle = TextStyle(
+  //   fontWeight: FontWeight.bold,
+  //   fontSize: 20,
+  // );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,7 +39,12 @@ class ShopApp extends StatelessWidget {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 8, right: 20, left: 20, bottom: 8),
+                      padding: const EdgeInsets.only(
+                        top: 8,
+                        right: 20,
+                        left: 20,
+                        bottom: 8,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
@@ -41,9 +53,11 @@ class ShopApp extends StatelessWidget {
                             indent: 135,
                             endIndent: 135,
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           Text(
-                            "Bodycon Dress",
+                            redShirt.name,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -57,20 +71,48 @@ class ShopApp extends StatelessWidget {
                 )
               ],
             ),
+            Positioned(
+              top: 35,
+              left: 10,
+              child: Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.grey[800],
+                    size: 24.0,
+                  ),
+                  Text("Back"),
+                ],
+              ),
+            ),
+            Positioned(
+              top: 35,
+              right: 20,
+              child: Stack(
+                children: <Widget>[
+                  Icon(
+                    Icons.shopping_cart,
+                    color: Colors.grey[800],
+                    size: 26.0,
+                  ),
+                  Positioned(
+                    top: 0,
+                    right : 0,
+                    child: Container(
+                      width: 12,
+                      height:  12,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),
     );
   }
 }
-
-// child: Icon(
-//   Icons.arrow_back_ios,
-//   color: Colors.pink,
-//   size: 24.0)
-// child: Icon(
-//   Icons.shopping_cart,
-//   color: Colors.pink,
-//   size: 24.0,
-//   semanticLabel: 'Text to announce in acessibility modes',
-// ),

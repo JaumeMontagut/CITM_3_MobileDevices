@@ -5,6 +5,81 @@ void main() {
   runApp(ShopApp());
 }
 
+class CustomTextStyle {
+  static TextStyle titleStyle() {
+    return TextStyle(
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.bold,
+      fontSize: 22,
+    );
+  }
+
+  static TextStyle title01Style() {
+    return TextStyle(
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.bold,
+      fontSize: 18,
+      color: Colors.grey[800],
+    );
+  }
+
+  static TextStyle buttonStyle(){
+    return TextStyle(
+      fontFamily: 'Poppins',
+      fontSize: 20,
+    );
+  }
+
+  static TextStyle regularStyle() {
+    return TextStyle(
+      fontFamily: 'Poppins',
+      fontSize: 14,
+      color: Colors.grey[600],
+    );
+  }
+}
+
+class SizeButton extends StatelessWidget {
+  final int size;
+
+  SizeButton(this.size);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 90,
+      height: 45,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        border: Border.all(
+          color: Colors.grey[300],
+          width: 1.0,
+        ),
+      ),
+      child: Center(
+        child: Text(
+          size.toString(),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+}
+
+class SizeButtonRow extends StatelessWidget
+{
+  @override
+  Widget build(BuildContext context)
+  {
+    List<Widget> sizedButtonList = new List<Widget>();
+    for(var i = 0; i < redShirt.sizes.length; ++i){
+      sizedButtonList.add(SizeButton(redShirt.sizes[i]));
+    }
+    //TODO: Add space between buttons
+    return Row(children:sizedButtonList);
+  }
+}
+
 class ShopApp extends StatelessWidget {
   final int itemsOnShoppingCart = 3;
   // final TextStyle titleStyle = TextStyle(
@@ -19,7 +94,7 @@ class ShopApp extends StatelessWidget {
         body: Stack(
           children: <Widget>[
             Image.asset(
-              'assets/clothes.png',
+              'assets/images/clothes.png',
             ),
             Column(
               children: <Widget>[
@@ -58,12 +133,28 @@ class ShopApp extends StatelessWidget {
                           ),
                           Text(
                             redShirt.name,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
+                            style: CustomTextStyle.titleStyle(),
                             textAlign: TextAlign.left,
                           ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            redShirt.description,
+                            style: CustomTextStyle.regularStyle(),
+                            maxLines: 4,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Select Size",
+                            style: CustomTextStyle.title01Style(),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SizeButtonRow(),
                         ],
                       ),
                     ),
@@ -78,10 +169,16 @@ class ShopApp extends StatelessWidget {
                 children: <Widget>[
                   Icon(
                     Icons.arrow_back_ios,
-                    color: Colors.grey[800],
+                    color: Colors.grey[1000],
                     size: 24.0,
                   ),
-                  Text("Back"),
+                  Text(
+                    "Back",
+                    style: TextStyle(
+                      color: Colors.grey[1000],
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -92,8 +189,9 @@ class ShopApp extends StatelessWidget {
                 overflow: Overflow.visible,
                 children: <Widget>[
                   Icon(
+                    // Icons.local_grocery_store,
                     Icons.shopping_cart,
-                    color: Colors.grey[800],
+                    color: Colors.grey[1000],
                     size: 26.0,
                   ),
                   Positioned(

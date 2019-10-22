@@ -89,6 +89,7 @@ class ShopApp extends StatelessWidget {
               top: 35,
               right: 20,
               child: Stack(
+                overflow: Overflow.visible,
                 children: <Widget>[
                   Icon(
                     Icons.shopping_cart,
@@ -96,16 +97,26 @@ class ShopApp extends StatelessWidget {
                     size: 26.0,
                   ),
                   Positioned(
-                    top: 0,
-                    right : 0,
+                    top: -2,
+                    right: 0,
                     child: Container(
-                      width: 12,
-                      height:  12,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.blue,
-                      ),
-                    ),
+                        width: 12,
+                        height: 12,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        child: Center(
+                          child: Text(
+                            itemsOnShoppingCart.toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 8,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        )),
                   )
                 ],
               ),

@@ -193,12 +193,24 @@ class ShopApp extends StatelessWidget {
                           Container(
                             width: 100,
                             height: 50,
-                            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 2),
                             child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
                                 Expanded(
                                   flex: 3,
                                   child: Container(
+                                    child: Row(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.attach_money,
+                                        ),
+                                        Text(
+                                          redShirt.price.toString(),
+                                        ),
+                                      ],
+                                    ),
                                     decoration: BoxDecoration(
                                       color: Colors.blue[300],
                                       borderRadius: BorderRadius.only(
@@ -277,8 +289,8 @@ class ShopApp extends StatelessWidget {
                             itemsOnShoppingCart.toString(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                              fontFamily: 'Poppins',
                               fontSize: 8,
-                              fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
                           ),

@@ -80,9 +80,12 @@ class SizeButtonRow extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> sizedButtonList = new List<Widget>();
     for (var i = 0; i < redShirt.sizes.length; ++i) {
-      sizedButtonList.add(SizeButton(redShirt.sizes[i]));
+      sizedButtonList.add(
+        SizeButton(
+          redShirt.sizes[i],
+        ),
+      );
     }
-    //TODO: Add space between buttons
     return Row(children: sizedButtonList);
   }
 }
@@ -165,7 +168,15 @@ class ShopApp extends StatelessWidget {
                           SizedBox(
                             height: 15,
                           ),
-                          SizeButtonRow(),
+                          //SizeButtonRow(),
+                          Container(
+                            width: 100,
+                            height: 50,
+                            child: ListView(
+                              children: <Widget>[SizeButtonRow()],
+                              scrollDirection: Axis.horizontal,
+                            ),
+                          ),
                           SizedBox(
                             height: 20,
                           ),

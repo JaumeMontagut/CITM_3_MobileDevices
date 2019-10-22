@@ -48,10 +48,10 @@ class CustomTextStyle {
   }
 }
 
-class SizeButton extends StatelessWidget {
+class ClothesSizeButton extends StatelessWidget {
   final int size;
 
-  SizeButton(this.size);
+  ClothesSizeButton(this.size);
 
   @override
   Widget build(BuildContext context) {
@@ -75,18 +75,21 @@ class SizeButton extends StatelessWidget {
   }
 }
 
-class SizeButtonRow extends StatelessWidget {
+class ClothesSizeListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> sizedButtonList = new List<Widget>();
     for (var i = 0; i < redShirt.sizes.length; ++i) {
       sizedButtonList.add(
-        SizeButton(
+        ClothesSizeButton(
           redShirt.sizes[i],
         ),
       );
     }
-    return Row(children: sizedButtonList);
+    return ListView(
+      children: sizedButtonList,
+      scrollDirection: Axis.horizontal,
+    );
   }
 }
 
@@ -107,14 +110,10 @@ class ShopApp extends StatelessWidget {
             ),
             ListView(
               children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 500,
-                    ),
-                    BottomPanel(),
-                  ],
+                SizedBox(
+                  height: 500,
                 ),
+                BottomPanel(),
               ],
             ),
             BackButton(),
@@ -259,10 +258,7 @@ class BottomPanel extends StatelessWidget {
           Container(
             width: 100,
             height: 50,
-            child: ListView(
-              children: <Widget>[SizeButtonRow()],
-              scrollDirection: Axis.horizontal,
-            ),
+            child: ClothesSizeListView(),
           ),
           SizedBox(
             height: 20,
@@ -271,13 +267,11 @@ class BottomPanel extends StatelessWidget {
             children: <Widget>[
               Text(
                 "DELIVERING TO ",
-                style: CustomTextStyle.locationStyle(
-                    Colors.grey[800]),
+                style: CustomTextStyle.locationStyle(Colors.grey[800]),
               ),
               Text(
                 redShirt.location.toUpperCase(),
-                style:
-                    CustomTextStyle.locationStyle(Colors.blue),
+                style: CustomTextStyle.locationStyle(Colors.blue),
               ),
               Icon(
                 Icons.arrow_drop_down,
@@ -291,8 +285,7 @@ class BottomPanel extends StatelessWidget {
           Container(
             width: 100,
             height: 50,
-            padding: EdgeInsets.symmetric(
-                horizontal: 10.0, vertical: 2),
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -300,8 +293,7 @@ class BottomPanel extends StatelessWidget {
                   flex: 3,
                   child: Container(
                     child: Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(
                           Icons.attach_money,

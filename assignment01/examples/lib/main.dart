@@ -34,7 +34,7 @@ class CustomTextStyle {
     return TextStyle(
       fontFamily: 'Poppins',
       color: color,
-      fontSize: 14,
+      fontSize: 12,
       fontWeight: FontWeight.bold,
     );
   }
@@ -42,7 +42,7 @@ class CustomTextStyle {
   static TextStyle regularStyle() {
     return TextStyle(
       fontFamily: 'Poppins',
-      fontSize: 14,
+      fontSize: 12,
       color: Colors.grey[600],
     );
   }
@@ -163,11 +163,11 @@ class ShopApp extends StatelessWidget {
                             style: CustomTextStyle.title01Style(),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 15,
                           ),
                           SizeButtonRow(),
                           SizedBox(
-                            height: 10,
+                            height: 20,
                           ),
                           Row(
                             children: <Widget>[
@@ -188,35 +188,40 @@ class ShopApp extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 20,
                           ),
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(30),
-                                      bottomLeft: Radius.circular(30),
+                          Container(
+                            width: 100,
+                            height: 50,
+                            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
+                            child: Row(
+                              children: <Widget>[
+                                Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue[300],
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        bottomLeft: Radius.circular(15),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue,
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(30),
-                                      bottomRight: Radius.circular(30),
+                                Expanded(
+                                  flex: 7,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue[700],
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(15),
+                                        bottomRight: Radius.circular(15),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           )
                         ],
                       ),

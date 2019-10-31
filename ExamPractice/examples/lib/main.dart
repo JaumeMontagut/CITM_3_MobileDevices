@@ -24,7 +24,71 @@ class MainWindow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CounterListPage(),
+      appBar: AppBar(
+        title: Text('Counter List'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          //Go to the next screen
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => NewCounterPage(),
+            ),
+          ).then(());
+        },
+      ),
     );
+  }
+}
+
+//Do I have to create another Scaffold to have the app bar?
+//Stateful because we need the text editing controllers
+class NewCounterPage extends StatefulWidget {
+  @override
+  _NewCounterPageState createState() => _NewCounterPageState();
+}
+
+class _NewCounterPageState extends State<NewCounterPage> {
+  TextEditingController _wordCtrl;
+
+  @override
+  void initState() {
+    _wordCtrl = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('New Counter'),
+        ),
+        body: Column(
+          children: <Widget>[
+            TextField(
+              controller: _wordCtrl,
+              decoration: InputDecoration(
+                labelText: 'Description',
+              ),
+            ),
+            FlatButton(
+              child: Text('SAVE'),
+              color : Colors.grey,
+              onPressed: () {
+                setState(
+                  () {
+                    Navigator.of(context).pop(
+                      {
+                        _wordCtrl.text,
+                      },
+                    );
+                  },
+                );
+              },
+            )
+          ],
+        ));
   }
 }
 
@@ -35,7 +99,6 @@ class CounterListPage extends StatefulWidget {
 
 class _CounterListPageState extends State<CounterListPage> {
   CounterList counterList;
-  double sideLength = 50;
 
   @override
   void initState() {
@@ -70,7 +133,7 @@ class _CounterListPageState extends State<CounterListPage> {
               onTap: () {
                 setState(
                   () {
-                    sideLength == 50 ? sideLength = 100 : sideLength = 50;
+                    counterList.counters[index].count++;
                   },
                 );
               },

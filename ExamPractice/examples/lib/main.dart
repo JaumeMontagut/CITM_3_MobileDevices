@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:examples/CounterList.dart';
 
 void main() {
   runApp(ExamenPractice());
+}
+
+class CounterWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
 
 class ExamenPractice extends StatelessWidget {
@@ -15,19 +23,52 @@ class MainWindow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GridView.count(
-        crossAxisCount: 5,
-        children: List.generate(
-          100,
-          (index) {
-            return Center(
-              child: Text(
-                'Item $index',
-                style: Theme.of(context).textTheme.headline,
+      body: CounterListPage(),
+    );
+  }
+}
+
+class CounterListPage extends StatefulWidget {
+  @override
+  _CounterListPageState createState() => _CounterListPageState();
+}
+
+class _CounterListPageState extends State<CounterListPage> {
+  CounterList counterList;
+
+  @override
+  void initState() {
+    counterList = CounterList();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      crossAxisCount: 3,
+      children: List.generate(
+        counterList.counters.length,
+        (index) {
+          return Container(
+            color: Colors.yellow,
+            child: InkWell(
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    flex: 80,
+                    child: Text('${counterList.counters[index].count}'),
+                  ),
+                  Expanded(
+                    flex: 20,
+                    child: Text(
+                      counterList.counters[index].word,
+                    ),
+                  ),
+                ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

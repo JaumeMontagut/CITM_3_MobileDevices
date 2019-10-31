@@ -35,6 +35,7 @@ class CounterListPage extends StatefulWidget {
 
 class _CounterListPageState extends State<CounterListPage> {
   CounterList counterList;
+  double sideLength = 50;
 
   @override
   void initState() {
@@ -49,7 +50,7 @@ class _CounterListPageState extends State<CounterListPage> {
       children: List.generate(
         counterList.counters.length,
         (index) {
-          return Container(
+          return Card(
             color: Colors.yellow,
             child: InkWell(
               child: Column(
@@ -66,6 +67,13 @@ class _CounterListPageState extends State<CounterListPage> {
                   ),
                 ],
               ),
+              onTap: () {
+                setState(
+                  () {
+                    sideLength == 50 ? sideLength = 100 : sideLength = 50;
+                  },
+                );
+              },
             ),
           );
         },

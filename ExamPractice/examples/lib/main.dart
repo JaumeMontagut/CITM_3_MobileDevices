@@ -19,23 +19,100 @@ class ExamenPractice extends StatelessWidget {
   }
 }
 
-class MainWindow extends StatelessWidget {
+class MainWindow extends StatefulWidget {
+  @override
+  _MainWindowState createState() => _MainWindowState();
+}
+
+class _MainWindowState extends State<MainWindow> {
+  CounterList counterList;
+
+  @override
+  void initState() {
+    counterList = CounterList();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CounterListPage(),
+      body: GridView.count(
+        crossAxisCount: 3,
+        children: List.generate(
+          counterList.counters.length,
+          (index) {
+            return Card(
+              color: Colors.yellow,
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 80,
+                      child: Text('${counterList.counters[index].count}'),
+                    ),
+                    Expanded(
+                      flex: 20,
+                      child: Text(
+                        counterList.counters[index].word,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  setState(
+                    () {
+                      counterList.counters[index].count++;
+                    },
+                  );
+                },
+              ),
+            );
+          },
+        ),
+      ),
       appBar: AppBar(
-        title: Text('Counter List'),
+        title: Row(
+          children: <Widget>[
+            Text('Counter List'),
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: (() {
+                setState() {
+                  //counterList.ResetAll();
+                  for (Counter counter in counterList.counters) {
+                    setState() {
+                      counter.count = 0;
+                    }
+                  }
+                }
+              }),
+            )
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
           //Go to the next screen
-          Navigator.of(context).push(
+          Navigator.of(context)
+              .push(
             MaterialPageRoute(
               builder: (context) => NewCounterPage(),
             ),
-          ).then(());
+          )
+              .then(
+            (newWord) {
+              if (newWord != null) {
+                setState(
+                  () {
+                    counterList.counters.add(
+                      Counter(newWord),
+                    );
+                  },
+                );
+              }
+            },
+          );
         },
       ),
     );
@@ -74,73 +151,16 @@ class _NewCounterPageState extends State<NewCounterPage> {
             ),
             FlatButton(
               child: Text('SAVE'),
-              color : Colors.grey,
+              color: Colors.grey,
               onPressed: () {
                 setState(
                   () {
-                    Navigator.of(context).pop(
-                      {
-                        _wordCtrl.text,
-                      },
-                    );
+                    Navigator.of(context).pop(_wordCtrl.text);
                   },
                 );
               },
             )
           ],
         ));
-  }
-}
-
-class CounterListPage extends StatefulWidget {
-  @override
-  _CounterListPageState createState() => _CounterListPageState();
-}
-
-class _CounterListPageState extends State<CounterListPage> {
-  CounterList counterList;
-
-  @override
-  void initState() {
-    counterList = CounterList();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 3,
-      children: List.generate(
-        counterList.counters.length,
-        (index) {
-          return Card(
-            color: Colors.yellow,
-            child: InkWell(
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 80,
-                    child: Text('${counterList.counters[index].count}'),
-                  ),
-                  Expanded(
-                    flex: 20,
-                    child: Text(
-                      counterList.counters[index].word,
-                    ),
-                  ),
-                ],
-              ),
-              onTap: () {
-                setState(
-                  () {
-                    counterList.counters[index].count++;
-                  },
-                );
-              },
-            ),
-          );
-        },
-      ),
-    );
   }
 }

@@ -71,24 +71,23 @@ class _MainWindowState extends State<MainWindow> {
         ),
       ),
       appBar: AppBar(
-        title: Row(
-          children: <Widget>[
-            Text('Counter List'),
-            IconButton(
+        title: Text('Counter List'),
+        actions: <Widget>[
+          IconButton(
               icon: Icon(Icons.refresh),
               onPressed: (() {
-                setState() {
+                setState(() {
                   //counterList.ResetAll();
                   for (Counter counter in counterList.counters) {
-                    setState() {
-                      counter.count = 0;
-                    }
+                    counter.count = 0;
                   }
-                }
+                  // for (int i = 0; i < counterList.counters.length; ++i) {
+                  //   counterList.counters[i].count = 0;
+                  // }
+                });
               }),
             )
-          ],
-        ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

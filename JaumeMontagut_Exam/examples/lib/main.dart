@@ -19,7 +19,7 @@ class ChooseSchedule extends StatefulWidget {
 
 class _ChooseScheduleState extends State<ChooseSchedule> {
   //The items that will be displayed
-  List<Horari> selectedSchedules = new List<Horari>();
+  List<int> selectedSchedulesIndex = new List<int>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +38,17 @@ class _ChooseScheduleState extends State<ChooseSchedule> {
                     Navigator.of(context)
                         .push(
                       MaterialPageRoute(
-                        builder: (context) => ChooseSchedulePage(),
+                        builder: (context) => ChooseSchedulePage(selectedSchedulesIndex),
                       ),
                     )
                         .then(
                       (selectedCheckbox) {
                         if (selectedCheckbox != null) {
                           setState(() {
-                            selectedSchedules.clear();
+                            selectedSchedulesIndex.clear();
                             for (int i = 0; i < totsElsHoraris.length; ++i) {
                               if (selectedCheckbox[i] == true) {
-                                selectedSchedules.add(totsElsHoraris[i]);
+                                selectedSchedulesIndex.add(i);
                               }
                             }
                           });
@@ -69,10 +69,10 @@ class _ChooseScheduleState extends State<ChooseSchedule> {
           ),
           Expanded(
             child: ListView.separated(
-              itemCount: selectedSchedules.length,
+              itemCount: selectedSchedulesIndex.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(selectedSchedules[index].toString()),
+                  title: Text(totsElsHoraris[selectedSchedulesIndex[index]].toString()),
                   trailing: Icon(Icons.close),
                 );
               },
@@ -95,6 +95,10 @@ class _ChooseScheduleState extends State<ChooseSchedule> {
 }
 
 class ChooseSchedulePage extends StatefulWidget {
+  final List<int> selectedSchedules;
+
+  ChooseSchedulePage(this.selectedSchedules);
+
   @override
   _ChooseSchedulePageState createState() => _ChooseSchedulePageState();
 }
@@ -105,7 +109,13 @@ class _ChooseSchedulePageState extends State<ChooseSchedulePage> {
   @override
   void initState() {
     for (int i = 0; i < totsElsHoraris.length; ++i)
+    {
       selectedCheckboxs.add(false);
+    }
+    for(int i = 0; i < widget.selectedSchedules.length; ++i)
+    {
+      selectedCheckboxs[widget.selectedSchedules[i]] = true;
+    }
     super.initState();
   }
 

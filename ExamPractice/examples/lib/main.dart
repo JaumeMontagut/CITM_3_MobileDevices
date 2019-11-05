@@ -74,19 +74,39 @@ class _MainWindowState extends State<MainWindow> {
         title: Text('Counter List'),
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.refresh),
-              onPressed: (() {
-                setState(() {
-                  //counterList.ResetAll();
-                  for (Counter counter in counterList.counters) {
-                    counter.count = 0;
-                  }
-                  // for (int i = 0; i < counterList.counters.length; ++i) {
-                  //   counterList.counters[i].count = 0;
-                  // }
-                });
-              }),
-            )
+            icon: Icon(Icons.refresh),
+            onPressed: (() {
+              setState(
+                () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text("Confim"),
+                      content:
+                          Text("Are you sure you want to reset the counters?"),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text("Cancel"),
+                          onPressed: () {
+                             //Navigator.of(context).pop();
+                          },
+                        ),
+                        FlatButton(
+                          child: Text("Reset"),
+                          onPressed: () {
+                            for (Counter counter in counterList.counters) {
+                              counter.count = 0;
+                            }
+                            //Navigator.of(context).pop();
+                          },
+                        )
+                      ],
+                    ),
+                  );
+                },
+              );
+            }),
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -152,11 +172,7 @@ class _NewCounterPageState extends State<NewCounterPage> {
               child: Text('SAVE'),
               color: Colors.grey,
               onPressed: () {
-                setState(
-                  () {
-                    Navigator.of(context).pop(_wordCtrl.text);
-                  },
-                );
+                Navigator.of(context).pop(_wordCtrl.text);
               },
             )
           ],

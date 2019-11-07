@@ -21,6 +21,20 @@ class _ChooseScheduleState extends State<ChooseSchedule> {
   //The items that will be displayed
   List<int> selectedSchedulesIndex = new List<int>();
 
+  _buildEmpty() {
+    return Expanded(
+      child: Center(
+        child: Text(
+          'No hi ha comptadors',
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 18,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,17 +42,29 @@ class _ChooseScheduleState extends State<ChooseSchedule> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(
+              vertical: 20,
+              horizontal: 10,
+            ),
             color: Colors.grey,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text("Horari escollit"),
+                Text(
+                  "Horari escollit",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
                 FlatButton(
+                  color: Colors.grey[300],
                   onPressed: () {
                     Navigator.of(context)
                         .push(
                       MaterialPageRoute(
-                        builder: (context) => ChooseSchedulePage(selectedSchedulesIndex),
+                        builder: (context) =>
+                            ChooseSchedulePage(selectedSchedulesIndex),
                       ),
                     )
                         .then(
@@ -57,34 +83,45 @@ class _ChooseScheduleState extends State<ChooseSchedule> {
                     );
                   },
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Icon(Icons.edit),
                       Text("Canviar"),
                     ],
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   ),
                 ),
               ],
             ),
           ),
-          Expanded(
-            child: ListView.separated(
-              itemCount: selectedSchedulesIndex.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(totsElsHoraris[selectedSchedulesIndex[index]].toString()),
-                  trailing: Icon(Icons.close),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return Divider(
-                  color: Colors.grey[300],
-                  height: 1,
-                  thickness: 1,
-                );
-              },
-            ),
-          )
+          (selectedSchedulesIndex.isEmpty
+              ? _buildEmpty()
+              : Expanded(
+                  child: ListView.separated(
+                    itemCount: selectedSchedulesIndex.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(
+                            totsElsHoraris[selectedSchedulesIndex[index]]
+                                .toString()),
+                        trailing: IconButton(
+                          icon: Icon(Icons.close),
+                          onPressed: () {
+                            setState(() {
+                              selectedSchedulesIndex.removeAt(index);
+                            });
+                          },
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return Divider(
+                        color: Colors.grey[300],
+                        height: 1,
+                        thickness: 1,
+                      );
+                    },
+                  ),
+                ))
         ],
       ),
       appBar: AppBar(
@@ -108,12 +145,10 @@ class _ChooseSchedulePageState extends State<ChooseSchedulePage> {
 
   @override
   void initState() {
-    for (int i = 0; i < totsElsHoraris.length; ++i)
-    {
+    for (int i = 0; i < totsElsHoraris.length; ++i) {
       selectedCheckboxs.add(false);
     }
-    for(int i = 0; i < widget.selectedSchedules.length; ++i)
-    {
+    for (int i = 0; i < widget.selectedSchedules.length; ++i) {
       selectedCheckboxs[widget.selectedSchedules[i]] = true;
     }
     super.initState();
@@ -123,7 +158,7 @@ class _ChooseSchedulePageState extends State<ChooseSchedulePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Escull horari"),
+        title: Text("Escull horari..."),
         actions: <Widget>[
           FlatButton(
             child: Icon(
@@ -151,6 +186,13 @@ class _ChooseSchedulePageState extends State<ChooseSchedulePage> {
                 );
               },
             ),
+            onTap: () {
+              setState(
+                () {
+                  selectedCheckboxs[index] = !selectedCheckboxs[index];
+                },
+              );
+            },
             title: Text(
               horari.toString(),
             ),

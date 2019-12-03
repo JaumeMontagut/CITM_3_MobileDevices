@@ -1,5 +1,6 @@
 import 'package:examples/product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'dart:convert';
 import 'dart:io';
@@ -118,14 +119,37 @@ class ClothesSizeListView extends StatelessWidget {
 }
 
 class ShopApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context){
-    return Provider<List<Product>>.value(
+  List<Product> _products = [];
+
+  Widget _body(){
+   return Provider<List<Product>>.value(
       value: _products,
       child: MaterialApp(
       home: ProductPage(),
       )
+   );
+   }
+
+  Widget _loadProducts ()
+  {
+    return FutureBuilder(
+      future: rootBundle.loadString('assets/products.json'),
+      builder: (context, AsyncSnapshot<String> snapshot)
+      {
+        if(!snapshot.hasData)
+        {
+          return Center(child: CircularProgressIndicator());
+        }
+        Map<String, dynamic> json = jsonDecode(snapshot.data);
+        _products = json['Products'];
+        return _body();
+      }
     );
+  }
+  
+  @override
+  Widget build(BuildContext context){
+    return _loadProducts();
   }
 }
 
@@ -140,25 +164,6 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState(){
     super.initState();
-  }
-
-  Future<void> _loadProducts() async{
-    try{
-      Directory dir = await getApplicationDocumentsDirectory();
-      File file = File('${dir.path}/assets/products.json');
-      String fileContents = await file.readAsString();
-      List json = jsonDecode(fileContents);
-      List<Product> loaded = [];
-      for (var elem in json)
-      {
-        loaded.add(Product.fromJson(elem));
-      }
-      super.setState(() => _products = loaded);
-    } catch (e)
-    {
-      print("ERROR: Loading json");
-      super.setState(() => _products = []);
-    }
   }
 
   @override

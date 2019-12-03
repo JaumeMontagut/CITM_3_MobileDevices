@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(ShopApp());
@@ -84,20 +85,22 @@ class ClothesSizeButton extends StatelessWidget {
 }
 
 class ClothesSizeListView extends StatelessWidget {
+  final int index;
   final int selectedNum;
 
-  ClothesSizeListView(this.selectedNum);
+  ClothesSizeListView(this.index, this.selectedNum);
 
   @override
   Widget build(BuildContext context) {
+    final List<Product> product = Provider.of<List<Product>(context)[index];
     List<Widget> clothesSizeListView = new List<Widget>();
     clothesSizeListView.add(
       SizedBox(width: 20),
     );
-    for (var i = 0; i < redShirt.sizes.length; ++i) {
+    for (var i = 0; i < product.sizes.length; ++i) {
       clothesSizeListView.add(
         ClothesSizeButton(
-          redShirt.sizes[i],
+          product.sizes[i],
           i == selectedNum,
         ),
       );
@@ -117,8 +120,11 @@ class ClothesSizeListView extends StatelessWidget {
 class ShopApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
-    return MaterialApp(
+    return Provider<List<Product>>.value(
+      value: _products,
+      child: MaterialApp(
       home: ProductPage(),
+      )
     );
   }
 }
@@ -130,11 +136,9 @@ class ProductPage extends StatefulWidget{
 
 class _ProductPageState extends State<ProductPage> {
   final int itemsOnShoppingCart = 3;
-  List<Product> _products;
 
   @override
   void initState(){
-    _loadProducts();
     super.initState();
   }
 
@@ -153,15 +157,13 @@ class _ProductPageState extends State<ProductPage> {
     } catch (e)
     {
       print("ERROR: Loading json");
-      super.setState(() => _products);
+      super.setState(() => _products = []);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Provider<List<Product>>.value(
-      value: _products,
-      child: Scaffold(
+    return Scaffold(
         body: Stack(
           children: <Widget>[
             Image.asset(

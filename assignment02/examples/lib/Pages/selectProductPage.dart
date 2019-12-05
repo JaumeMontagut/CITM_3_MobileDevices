@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:examples/Model/product.dart';
+import 'package:examples/Pages/productPage.dart';
 
 class SelectProductPage extends StatelessWidget {
   @override
@@ -14,10 +15,21 @@ class SelectProductPage extends StatelessWidget {
           ),
           itemCount: products.length,
           itemBuilder: (context, index) {
-            return Card(
-              child: Center(
-                child: Text(products[index].name),
+            return FlatButton(
+              child: Card(
+                child: Center(
+                  child: Text(
+                    products[index].name,
+                  ),
+                ),
               ),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ProductPage(index),
+                  ),
+                );
+              },
             );
           },
         ),

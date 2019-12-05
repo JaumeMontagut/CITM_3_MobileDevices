@@ -64,7 +64,7 @@ class ShopApp extends StatelessWidget {
     return Provider<List<Product>>.value(
       value: _products,
       child: MaterialApp(
-        home: ProductPage(currIndex),
+        home: SelectProductPage(),
       ),
     );
   }

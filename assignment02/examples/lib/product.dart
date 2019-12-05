@@ -1,6 +1,6 @@
 class Product {
   String name, description, location, imagePath;
-  List<int> sizes;
+  List<double> sizes;
   double price;
   bool inCart;
 
@@ -13,8 +13,8 @@ class Product {
       : name = json['name'],
         description = json['description'],
         location = json['location'],
-        sizes = json['sizes'],
-        price = json['price'],
+        price = json['price'].toDouble(),
+        sizes = json['sizes'].cast<double>(),
         imagePath = json['imagePath'],
         inCart = json['inCart'];
 }

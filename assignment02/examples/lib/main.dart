@@ -1,10 +1,7 @@
 import 'package:examples/product.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'dart:convert';
-import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -58,40 +55,38 @@ class CustomTextStyle {
 
 class ShopApp extends StatelessWidget {
   List<Product> _products = [];
+  int currIndex = 0; //The index of the current product
+  //TODO: Make the "Select product page" the main page
 
-  Widget _body(){
-   return Provider<List<Product>>.value(
+  Widget _body() {
+    return Provider<List<Product>>.value(
       value: _products,
       child: MaterialApp(
-      home: ProductPage(),
-      )
-   );
-   }
-
-  Widget _loadProducts ()
-  {
-    return FutureBuilder(
-      future: rootBundle.loadString('assets/products.json'),
-      builder: (context, AsyncSnapshot<String> snapshot)
-      {
-        if(!snapshot.hasData)
-        {
-          return Center(child: CircularProgressIndicator());
-        }
-        Map<String, dynamic> json = jsonDecode(snapshot.data);
-        _products = json['Products'];
-        return _body();
-      }
+        home: ProductPage(currIndex),
+      ),
     );
   }
-  
+
+  Widget _loadProducts() {
+    return FutureBuilder(
+        future: rootBundle.loadString('assets/products.json'),
+        builder: (context, AsyncSnapshot<String> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+          List json = jsonDecode(snapshot.data);
+          _products = json.map((elem) => Product.fromJson(elem)).toList();
+          return _body();
+        });
+  }
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return _loadProducts();
   }
 }
 
-class ProductPage extends StatefulWidget{
+class ProductPage extends StatefulWidget {
   final int index;
   ProductPage(this.index);
 
@@ -103,42 +98,40 @@ class _ProductPageState extends State<ProductPage> {
   final int itemsOnShoppingCart = 3;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     Product product = Provider.of<List<Product>>(context)[widget.index];
     return Scaffold(
-        body: Stack(
-          children: <Widget>[
-            Image.asset(
-              product.imagePath,
-              height: double.infinity,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-            ListView(
-              children: <Widget>[
-                SizedBox(
-                  height: 480,
-                ),
-                BottomPanel(),
-              ],
-            ),
-            BackButton(),
-            ShoppingCart(itemsOnShoppingCart: itemsOnShoppingCart)
-          ],
-        ),
+      body: Stack(
+        children: <Widget>[
+          Image.asset(
+            product.imagePath,
+            height: double.infinity,
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
+          ListView(
+            children: <Widget>[
+              SizedBox(
+                height: 480,
+              ),
+              BottomPanel(widget.index),
+            ],
+          ),
+          BackButton(),
+          ShoppingCart(itemsOnShoppingCart: itemsOnShoppingCart)
+        ],
       ),
     );
   }
 }
 
 class ClothesSizeButton extends StatelessWidget {
-  final int clothesSize;
+  final double clothesSize;
   final bool selected;
 
   ClothesSizeButton(this.clothesSize, this.selected);
@@ -168,14 +161,14 @@ class ClothesSizeButton extends StatelessWidget {
 }
 
 class ClothesSizeListView extends StatelessWidget {
-  final int index;
-  final int selectedNum;
+  final int productIdx;
+  final int selectedButtonIdx;
 
-  ClothesSizeListView(this.index, this.selectedNum);
+  ClothesSizeListView(this.productIdx, this.selectedButtonIdx);
 
   @override
   Widget build(BuildContext context) {
-    Product product = Provider.of<List<Product>>(context)[index];
+    Product product = Provider.of<List<Product>>(context)[productIdx];
     List<Widget> clothesSizeListView = new List<Widget>();
     clothesSizeListView.add(
       SizedBox(width: 20),
@@ -184,7 +177,7 @@ class ClothesSizeListView extends StatelessWidget {
       clothesSizeListView.add(
         ClothesSizeButton(
           product.sizes[i],
-          i == selectedNum,
+          i == selectedButtonIdx,
         ),
       );
       clothesSizeListView.add(
@@ -226,23 +219,24 @@ class ShoppingCart extends StatelessWidget {
             top: -2,
             right: 0,
             child: Container(
-                width: 12,
-                height: 12,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.blue[700],
-                ),
-                child: Center(
-                  child: Text(
-                    itemsOnShoppingCart.toString(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 8,
-                      color: Colors.white,
-                    ),
+              width: 12,
+              height: 12,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.blue[700],
+              ),
+              child: Center(
+                child: Text(
+                  itemsOnShoppingCart.toString(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 8,
+                    color: Colors.white,
                   ),
-                )),
+                ),
+              ),
+            ),
           )
         ],
       ),

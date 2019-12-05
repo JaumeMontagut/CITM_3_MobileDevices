@@ -18,8 +18,23 @@ class SelectProductPage extends StatelessWidget {
             return FlatButton(
               child: Card(
                 child: Center(
-                  child: Text(
-                    products[index].name,
+                  child: Stack(
+                    children: <Widget>[
+                      Image.asset(
+                        products[index].imagePath,
+                      ),
+                      Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 150,
+                          ),
+                          Text(
+                            products[index].name,
+                            textAlign: TextAlign.right,
+                          )
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),

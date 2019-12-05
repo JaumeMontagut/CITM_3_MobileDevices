@@ -1,4 +1,5 @@
 import 'package:examples/product.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -55,6 +56,87 @@ class CustomTextStyle {
   }
 }
 
+class ShopApp extends StatelessWidget {
+  List<Product> _products = [];
+
+  Widget _body(){
+   return Provider<List<Product>>.value(
+      value: _products,
+      child: MaterialApp(
+      home: ProductPage(),
+      )
+   );
+   }
+
+  Widget _loadProducts ()
+  {
+    return FutureBuilder(
+      future: rootBundle.loadString('assets/products.json'),
+      builder: (context, AsyncSnapshot<String> snapshot)
+      {
+        if(!snapshot.hasData)
+        {
+          return Center(child: CircularProgressIndicator());
+        }
+        Map<String, dynamic> json = jsonDecode(snapshot.data);
+        _products = json['Products'];
+        return _body();
+      }
+    );
+  }
+  
+  @override
+  Widget build(BuildContext context){
+    return _loadProducts();
+  }
+}
+
+class ProductPage extends StatefulWidget{
+  final int index;
+  ProductPage(this.index);
+
+  @override
+  _ProductPageState createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  final int itemsOnShoppingCart = 3;
+
+  @override
+  void initState(){
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context)
+  {
+    Product product = Provider.of<List<Product>>(context)[widget.index];
+    return Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Image.asset(
+              product.imagePath,
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            ListView(
+              children: <Widget>[
+                SizedBox(
+                  height: 480,
+                ),
+                BottomPanel(),
+              ],
+            ),
+            BackButton(),
+            ShoppingCart(itemsOnShoppingCart: itemsOnShoppingCart)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class ClothesSizeButton extends StatelessWidget {
   final int clothesSize;
   final bool selected;
@@ -93,7 +175,7 @@ class ClothesSizeListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Product> product = Provider.of<List<Product>(context)[index];
+    Product product = Provider.of<List<Product>>(context)[index];
     List<Widget> clothesSizeListView = new List<Widget>();
     clothesSizeListView.add(
       SizedBox(width: 20),
@@ -114,82 +196,6 @@ class ClothesSizeListView extends StatelessWidget {
     return ListView(
       children: clothesSizeListView,
       scrollDirection: Axis.horizontal,
-    );
-  }
-}
-
-class ShopApp extends StatelessWidget {
-  List<Product> _products = [];
-
-  Widget _body(){
-   return Provider<List<Product>>.value(
-      value: _products,
-      child: MaterialApp(
-      home: ProductPage(),
-      )
-   );
-   }
-
-  Widget _loadProducts ()
-  {
-    return FutureBuilder(
-      future: rootBundle.loadString('assets/products.json'),
-      builder: (context, AsyncSnapshot<String> snapshot)
-      {
-        if(!snapshot.hasData)
-        {
-          return Center(child: CircularProgressIndicator());
-        }
-        Map<String, dynamic> json = jsonDecode(snapshot.data);
-        _products = json['Products'];
-        return _body();
-      }
-    );
-  }
-  
-  @override
-  Widget build(BuildContext context){
-    return _loadProducts();
-  }
-}
-
-class ProductPage extends StatefulWidget{
-  @override
-  _ProductPageState createState() => _ProductPageState();
-}
-
-class _ProductPageState extends State<ProductPage> {
-  final int itemsOnShoppingCart = 3;
-
-  @override
-  void initState(){
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Stack(
-          children: <Widget>[
-            Image.asset(
-              redShirt.imagePath,
-              height: double.infinity,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-            ListView(
-              children: <Widget>[
-                SizedBox(
-                  height: 480,
-                ),
-                BottomPanel(),
-              ],
-            ),
-            BackButton(),
-            ShoppingCart(itemsOnShoppingCart: itemsOnShoppingCart)
-          ],
-        ),
-      ),
     );
   }
 }
@@ -278,13 +284,13 @@ class BackButton extends StatelessWidget {
 
 class BottomPanel extends StatelessWidget {
   static const double paddingSize = 20;
+  final int index;
 
-  const BottomPanel({
-    Key key,
-  }) : super(key: key);
+  BottomPanel(this.index);
 
   @override
   Widget build(BuildContext context) {
+    Product product = Provider.of<List<Product>>(context)[index];
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -312,7 +318,7 @@ class BottomPanel extends StatelessWidget {
               horizontal: paddingSize,
             ),
             child: Text(
-              redShirt.name,
+              product.name,
               style: CustomTextStyle.titleStyle(),
               textAlign: TextAlign.left,
             ),
@@ -325,7 +331,7 @@ class BottomPanel extends StatelessWidget {
               horizontal: paddingSize,
             ),
             child: Text(
-              redShirt.description,
+              product.description,
               style: CustomTextStyle.regularStyle(),
               maxLines: 4,
             ),
@@ -347,7 +353,7 @@ class BottomPanel extends StatelessWidget {
           ),
           Container(
             height: 40,
-            child: ClothesSizeListView(0),
+            child: ClothesSizeListView(index, 0),
           ),
           SizedBox(
             height: 20,
@@ -361,7 +367,7 @@ class BottomPanel extends StatelessWidget {
                   style: CustomTextStyle.locationStyle(Colors.grey[800]),
                 ),
                 Text(
-                  redShirt.location.toUpperCase(),
+                  product.location.toUpperCase(),
                   style: CustomTextStyle.locationStyle(Colors.blue[700]),
                 ),
                 Icon(
@@ -395,7 +401,7 @@ class BottomPanel extends StatelessWidget {
                             color: Colors.white,
                           ),
                           Text(
-                            redShirt.price.toString(),
+                            product.price.toString(),
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,

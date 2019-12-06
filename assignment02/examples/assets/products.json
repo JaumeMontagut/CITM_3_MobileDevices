@@ -15,7 +15,7 @@
             "onCart": false
         },
         {
-            "name": "I have a legal firearm suit long long long long long long long long long long long long long long long long long long long long long long long long long long long long long",
+            "name": "I have a legal firearm suit",
             "description": "Firearm not included. Now you have your perfect suit to walk through the streets with your firearm.",
             "location": "New Lane 129, CA",
             "sizes": [
@@ -30,8 +30,8 @@
             "onCart": false
         },
         {
-            "name": "Red suit",
-            "description": "A standard red suit. Do you really wanna look as basic as this guy? Keep looking through the catalog norime...",
+            "name": "Suits to differentiate from your clones",
+            "description": "Sometimes it's hard to tell yourself apart from your clones, we got you covered with this set of matching suits.",
             "location": "New Lane 129, CA",
             "sizes": [
                 31.0,
@@ -41,7 +41,38 @@
                 35.0
             ],
             "price": 80,
-            "imagePath": "https://thumbs.dreamstime.com/b/handsome-man-dressed-elegant-posing-studio-26691997.jpg",
+            "imagePath": "https://www.aokdress.com/image/cache/data/AK-11271%20(2)-470x500.jpg",
+            "onCart": false
+        },
+        {
+            "name": "Chiki Wau Wau suit",
+            "description": "The perfect pose requires the perfect suit tu impres your lover.",
+            "location": "New Lane 129, CA",
+            "sizes": [
+                31.0,
+                32.0,
+                33.0,
+                34.0,
+                35.0
+            ],
+            "price": 80,
+            "imagePath": "https://media.istockphoto.com/photos/asian-guy-with-dramatic-pose-picture-id509706605?k=6&m=509706605&s=170667a&w=0&h=yTqF9zzAVVpcbDs5yztssBuMbSTilgF_zdR7Rq4ZQ2Q=",
+            "onCart": false
+        },
+        {
+            "name": "Cowboy suit",
+            "description": "The perfect pose requires the perfect suit tu impres your lover.",
+            "location": "New Lane 129, CA",
+            "sizes": [
+                31.0,
+                32.0,
+                33.0,
+                34.0,
+                35.0
+            ],
+            "price": 80,
+            "imagePath": "https://images.jg-cdn.com/image/34ead955-c8eb-460f-9dd2-761c8365c102.jpg?template=size1200x630face",
             "onCart": false
         }
+        
     ]

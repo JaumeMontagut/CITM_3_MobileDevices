@@ -169,41 +169,39 @@ class _Tile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        cardWidth = constraints.maxWidth - titleSpacing * 2;
-        return Card(
-          //cardWidth = context.size.width
-          child: Stack(
-            overflow: Overflow.clip,
-            children: <Widget>[
-              //new Center(child: new CircularProgressIndicator(),),
-              Center(
-                child: FadeInImage.memoryNetwork(
-                  placeholder: kTransparentImage,
-                  image: product.imagePath,
-                ),
-              ),
-              Positioned(
-                top: titleSpacing,
-                left: titleSpacing,
-                child: Container(
-                  width: cardWidth,
-                  child: Text(
-                    product.name,
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Colors.black54,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+    return Card(
+      //cardWidth = context.size.width
+      child: Stack(
+        overflow: Overflow.clip,
+        children: <Widget>[
+          //new Center(child: new CircularProgressIndicator(),),
+          Center(
+            child: FadeInImage.memoryNetwork(
+              placeholder: kTransparentImage,
+              image: product.imagePath,
+            ),
           ),
-        );
-      },
+          Positioned(
+            bottom: titleSpacing,
+            right: titleSpacing,
+            left: titleSpacing,
+            child: Container(
+              width: cardWidth,
+              child: Text(
+                product.name,
+                textAlign: TextAlign.right,
+                style: const TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                  backgroundColor: Colors.black54,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

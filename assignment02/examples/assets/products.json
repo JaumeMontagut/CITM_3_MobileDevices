@@ -12,7 +12,6 @@
             ],
             "price": 80,
             "imagePath": "https://thumbs.dreamstime.com/b/handsome-man-dressed-elegant-posing-studio-26691997.jpg",
-            "onCart": false
         },
         {
             "name": "I have a legal firearm suit",
@@ -27,7 +26,6 @@
             ],
             "price": 80,
             "imagePath": "https://i.pinimg.com/736x/4b/7d/69/4b7d692da29322e64a6830a0586587f3.jpg",
-            "onCart": false
         },
         {
             "name": "Suits to differentiate from your clones",
@@ -42,7 +40,6 @@
             ],
             "price": 80,
             "imagePath": "https://www.aokdress.com/image/cache/data/AK-11271%20(2)-470x500.jpg",
-            "onCart": false
         },
         {
             "name": "Chiki Wau Wau suit",
@@ -57,7 +54,6 @@
             ],
             "price": 80,
             "imagePath": "https://media.istockphoto.com/photos/asian-guy-with-dramatic-pose-picture-id509706605?k=6&m=509706605&s=170667a&w=0&h=yTqF9zzAVVpcbDs5yztssBuMbSTilgF_zdR7Rq4ZQ2Q=",
-            "onCart": false
         },
         {
             "name": "Cowboy suit",
@@ -72,7 +68,6 @@
             ],
             "price": 80,
             "imagePath": "https://images.jg-cdn.com/image/34ead955-c8eb-460f-9dd2-761c8365c102.jpg?template=size1200x630face",
-            "onCart": false
         },
         {
             "name": "Flexibility suit",
@@ -87,7 +82,6 @@
             ],
             "price": 80,
             "imagePath": "https://farm5.static.flickr.com/4506/37779065641_48a12d5c3a_b.jpg",
-            "onCart": false
         },
         {
             "name": "Masculine overdose suit",
@@ -102,11 +96,10 @@
             ],
             "price": 80,
             "imagePath": "https://i.pinimg.com/736x/43/77/7d/43777d31af0e14781d3e2bfcad6fa5e4.jpg",
-            "onCart": false
         },
         {
             "name": "Flying suit",
-            "description": "Ever dreamed of taking to the skies? well, now you can't and you will never be able to.\nBut with these hallucinatory googles made of our special secret plants, you'll be transported to the skies in no time!.",
+            "description": "Ever dreamed of taking to the skies? well, now you can't and you will never be able to.\nBut with these hallucinatory googles made of our special secret plants, you'll be transported to the skies in no time!",
             "location": "New Lane 129, CA",
             "sizes": [
                 31.0,
@@ -117,7 +110,6 @@
             ],
             "price": 80,
             "imagePath": "https://thumbs.dreamstime.com/b/i-believe-i-can-touch-sky-13375415.jpg",
-            "onCart": false
         },
         {
             "name": "Real flying suit",
@@ -132,7 +124,6 @@
             ],
             "price": 80,
             "imagePath": "https://i.pinimg.com/236x/3d/54/a5/3d54a5333a1f2f55580492d5151417c9---year-old-cincinnati.jpg",
-            "onCart": false
         },
         {
             "name": "Caught in fraganti suit",
@@ -147,7 +138,6 @@
             ],
             "price": 80,
             "imagePath": "https://i.pinimg.com/originals/cf/3a/79/cf3a79982776ebe28e9c371a1972527c.jpg",
-            "onCart": false
         },
         {
             "name": "Really surprised suit",
@@ -162,7 +152,6 @@
             ],
             "price": 80,
             "imagePath": "https://us.123rf.com/450wm/elwynn/elwynn1601/elwynn160100868/52821564-asian-business-man-surprised-with-outrageously-and-funny-pose-full-length-portrait-isolated.jpg?ver=6",
-            "onCart": false
         },
         {
             "name": "The no suit",
@@ -177,6 +166,5 @@
             ],
             "price": 1000,
             "imagePath": "https://www.homeose.fr/54162-thickbox_default/armored-briefs-in-the-rubber-look-codpiece-removable-zippered-rear-black.jpg",
-            "onCart": false
         }
     ]

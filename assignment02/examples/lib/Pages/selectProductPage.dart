@@ -4,7 +4,6 @@ import 'package:examples/Model/product.dart';
 import 'package:examples/Pages/productPage.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'dart:typed_data';
-import 'package:examples/Helpers/TextStyles.dart';
 
 final Uint8List kTransparentImage = new Uint8List.fromList(<int>[
   0x89,
@@ -101,7 +100,6 @@ class SelectProductPage extends StatelessWidget {
                 fontSize: 15,
                 color: Colors.grey[200]),
             textAlign: TextAlign.left,
-            //align left
           ),
         ),
       ),

@@ -4,7 +4,6 @@ import 'package:examples/Model/product.dart';
 import 'package:examples/Helpers/TextStyles.dart';
 import 'package:examples/Widgets/productPage/clothesSizes.dart';
 
-
 class BottomPanel extends StatelessWidget {
   static const double paddingSize = 20;
   final int index;
@@ -103,7 +102,10 @@ class BottomPanel extends StatelessWidget {
           SizedBox(
             height: 25,
           ),
-          AddToCart(paddingSize, product),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: paddingSize),
+            child: AddToCart(index),
+          ),
           SizedBox(
             height: 25,
           ),
@@ -114,15 +116,15 @@ class BottomPanel extends StatelessWidget {
 }
 
 class AddToCart extends StatelessWidget {
-  const AddToCart(this.paddingSize, this.product);
+  final int index;
 
-  final double paddingSize;
-  final Product product;
+  AddToCart(this.index);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: paddingSize),
+    Product product = Provider.of<List<Product>>(context)[index];
+    return FlatButton(
+      onPressed: () => ,//TODO: Add to cart
       child: Container(
         width: 100,
         height: 50,

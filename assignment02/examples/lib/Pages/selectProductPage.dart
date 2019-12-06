@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:examples/Model/product.dart';
 import 'package:examples/Pages/productPage.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'dart:math';
 import 'dart:typed_data';
 
 final Uint8List kTransparentImage = new Uint8List.fromList(<int>[
@@ -73,15 +72,8 @@ final Uint8List kTransparentImage = new Uint8List.fromList(<int>[
   0xAE,
 ]);
 
-List<IntSize> _createSizes(int count) {
-  Random rnd = new Random(); //TODO: Why random size?
-  return new List.generate(count,
-      (i) => new IntSize((rnd.nextInt(500) + 200), rnd.nextInt(800) + 200));
-}
-
 class SelectProductPage extends StatelessWidget {
-  SelectProductPage(this.itemCount) : _sizes = _createSizes(itemCount).toList();
-  final List<IntSize> _sizes;
+  SelectProductPage(this.itemCount);
   final int itemCount;
 
   @override
@@ -93,7 +85,7 @@ class SelectProductPage extends StatelessWidget {
         crossAxisCount: 4,
         mainAxisSpacing: 4.0,
         crossAxisSpacing: 4.0,
-        itemBuilder: (context, index) => new _Tile(products[index], _sizes[index]),
+        itemBuilder: (context, index) => new _Tile(products[index]),
         staggeredTileBuilder: (index) => new StaggeredTile.fit(2),
         itemCount: itemCount,
         // body: Scrollbar(
@@ -143,17 +135,9 @@ class SelectProductPage extends StatelessWidget {
   }
 }
 
-class IntSize {
-  const IntSize(this.width, this.height);
-
-  final int width;
-  final int height;
-}
-
 class _Tile extends StatelessWidget {
-  const _Tile(this.product, this.size);
+  const _Tile(this.product);
 
-  final IntSize size;
   final Product product;
 
   @override

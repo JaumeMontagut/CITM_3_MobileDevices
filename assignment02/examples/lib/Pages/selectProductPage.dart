@@ -161,37 +161,43 @@ class SelectProductPage extends StatelessWidget {
 }
 
 class _Tile extends StatelessWidget {
-  const _Tile(this.product);
+
+  double cardWidth;
+  _Tile(this.product);
 
   final Product product;
 
   @override
   Widget build(BuildContext context) {
-    return new Card(
-      child: new Column(
+    return Card(
+      //cardWidth = context.size.width
+      child: Stack(
+        overflow: Overflow.clip,
         children: <Widget>[
-          new Stack(
-            children: <Widget>[
-              new Center(child: new CircularProgressIndicator()),
-              new Center(
-                child: new FadeInImage.memoryNetwork(
-                  placeholder: kTransparentImage,
-                  image: product.imagePath,
+          //new Center(child: new CircularProgressIndicator(),),
+          Center(
+            child: FadeInImage.memoryNetwork(
+              placeholder: kTransparentImage,
+              image: product.imagePath,
+            ),
+          ),
+          Positioned(
+            top: 5,
+            left: 5,
+             child: Container(
+               width: context.size.width,
+              child: Text(
+                product.name,
+                maxLines: 100,
+                style: const TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                  color: Colors.black54,
                 ),
               ),
-            ],
-          ),
-          new Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: new Column(
-              children: <Widget>[
-                new Text(
-                  product.name,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
             ),
-          )
+          ),
         ],
       ),
     );

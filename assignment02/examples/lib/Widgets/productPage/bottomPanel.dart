@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:examples/Model/product.dart';
-import 'package:examples/main.dart';//TODO: Put the text styles somewhere else and remove this include
+import 'package:examples/Helpers/TextStyles.dart';
+import 'package:examples/Widgets/productPage/clothesSizes.dart';
+
 
 class BottomPanel extends StatelessWidget {
   static const double paddingSize = 20;

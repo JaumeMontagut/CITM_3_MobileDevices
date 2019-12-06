@@ -4,6 +4,7 @@ import 'package:examples/Model/product.dart';
 import 'package:examples/Pages/productPage.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'dart:typed_data';
+import 'package:examples/Helpers/TextStyles.dart';
 
 final Uint8List kTransparentImage = new Uint8List.fromList(<int>[
   0x89,
@@ -80,6 +81,30 @@ class SelectProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Product> products = Provider.of<List<Product>>(context);
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Suiter',
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold,
+            fontSize: 28,
+          ),
+        ),
+        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(15.0),
+          child: Text(
+            'A suit for every occasion',
+            style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.grey[200]),
+            textAlign: TextAlign.left,
+            //align left
+          ),
+        ),
+      ),
       body: StaggeredGridView.countBuilder(
         primary: false,
         crossAxisCount: 4,
@@ -147,7 +172,7 @@ class _Tile extends StatelessWidget {
         children: <Widget>[
           new Stack(
             children: <Widget>[
-              //new Center(child: new CircularProgressIndicator()),
+              new Center(child: new CircularProgressIndicator()),
               new Center(
                 child: new FadeInImage.memoryNetwork(
                   placeholder: kTransparentImage,

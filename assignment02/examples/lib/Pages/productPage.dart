@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:examples/Model/product.dart';
-import 'package:examples/main.dart';//TOOD: Extract shopping cart widget and remove this
 import 'package:examples/Widgets/productPage/bottomPanel.dart';
+import 'package:examples/Widgets/productPage/cartButton.dart';
+import 'package:examples/Widgets/productPage/customBackButton.dart';
 
 
 class ProductPage extends StatefulWidget {

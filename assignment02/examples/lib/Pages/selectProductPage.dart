@@ -161,45 +161,49 @@ class SelectProductPage extends StatelessWidget {
 }
 
 class _Tile extends StatelessWidget {
-
   double cardWidth;
+  double titleSpacing = 5.0;
   _Tile(this.product);
 
   final Product product;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      //cardWidth = context.size.width
-      child: Stack(
-        overflow: Overflow.clip,
-        children: <Widget>[
-          //new Center(child: new CircularProgressIndicator(),),
-          Center(
-            child: FadeInImage.memoryNetwork(
-              placeholder: kTransparentImage,
-              image: product.imagePath,
-            ),
-          ),
-          Positioned(
-            top: 5,
-            left: 5,
-             child: Container(
-               width: context.size.width,
-              child: Text(
-                product.name,
-                maxLines: 100,
-                style: const TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                  color: Colors.black54,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        cardWidth = constraints.maxWidth - titleSpacing * 2;
+        return Card(
+          //cardWidth = context.size.width
+          child: Stack(
+            overflow: Overflow.clip,
+            children: <Widget>[
+              //new Center(child: new CircularProgressIndicator(),),
+              Center(
+                child: FadeInImage.memoryNetwork(
+                  placeholder: kTransparentImage,
+                  image: product.imagePath,
                 ),
               ),
-            ),
+              Positioned(
+                top: titleSpacing,
+                left: titleSpacing,
+                child: Container(
+                  width: cardWidth,
+                  child: Text(
+                    product.name,
+                    style: const TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.black54,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

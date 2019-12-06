@@ -28,5 +28,20 @@
             "price": 80,
             "imagePath": "https://i.pinimg.com/736x/4b/7d/69/4b7d692da29322e64a6830a0586587f3.jpg",
             "onCart": false
+        },
+        {
+            "name": "Red suit",
+            "description": "A standard red suit. Do you really wanna look as basic as this guy? Keep looking through the catalog norime...",
+            "location": "New Lane 129, CA",
+            "sizes": [
+                31.0,
+                32.0,
+                33.0,
+                34.0,
+                35.0
+            ],
+            "price": 80,
+            "imagePath": "https://thumbs.dreamstime.com/b/handsome-man-dressed-elegant-posing-studio-26691997.jpg",
+            "onCart": false
         }
     ]

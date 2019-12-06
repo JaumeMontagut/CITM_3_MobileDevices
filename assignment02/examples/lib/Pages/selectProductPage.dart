@@ -15,8 +15,15 @@ class SelectProductPage extends StatelessWidget {
           ),
           itemCount: products.length,
           itemBuilder: (context, index) {
-            return FlatButton(
-              child: Card(
+            return Card(
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ProductPage(index),
+                    ),
+                  );
+                },
                 child: Center(
                   child: Stack(
                     children: <Widget>[
@@ -38,13 +45,6 @@ class SelectProductPage extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ProductPage(index),
-                  ),
-                );
-              },
             );
           },
         ),

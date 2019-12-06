@@ -93,7 +93,7 @@ class SelectProductPage extends StatelessWidget {
         crossAxisCount: 4,
         mainAxisSpacing: 4.0,
         crossAxisSpacing: 4.0,
-        itemBuilder: (context, index) => new _Tile(index, _sizes[index]),
+        itemBuilder: (context, index) => new _Tile(products[index], _sizes[index]),
         staggeredTileBuilder: (index) => new StaggeredTile.fit(2),
         itemCount: itemCount,
         // body: Scrollbar(
@@ -151,10 +151,10 @@ class IntSize {
 }
 
 class _Tile extends StatelessWidget {
-  const _Tile(this.index, this.size);
+  const _Tile(this.product, this.size);
 
   final IntSize size;
-  final int index;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +167,7 @@ class _Tile extends StatelessWidget {
               new Center(
                 child: new FadeInImage.memoryNetwork(
                   placeholder: kTransparentImage,
-                  image: 'https://picsum.photos/${size.width}/${size.height}/',
+                  image: product.imagePath,
                 ),
               ),
             ],
@@ -177,16 +177,8 @@ class _Tile extends StatelessWidget {
             child: new Column(
               children: <Widget>[
                 new Text(
-                  'Image number $index',
+                  product.name,
                   style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                new Text(
-                  'Width: ${size.width}',
-                  style: const TextStyle(color: Colors.grey),
-                ),
-                new Text(
-                  'Height: ${size.height}',
-                  style: const TextStyle(color: Colors.grey),
                 ),
               ],
             ),

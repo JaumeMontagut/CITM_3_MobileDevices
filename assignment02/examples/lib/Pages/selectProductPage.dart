@@ -110,97 +110,62 @@ class SelectProductPage extends StatelessWidget {
         crossAxisCount: 4,
         mainAxisSpacing: 4.0,
         crossAxisSpacing: 4.0,
-        itemBuilder: (context, index) => new _Tile(products[index]),
+        itemBuilder: (context, index) => new _Tile(index),
         staggeredTileBuilder: (index) => new StaggeredTile.fit(2),
         itemCount: itemCount,
-        // body: Scrollbar(
-        //   child:
-        // GridView.builder(
-        //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //     crossAxisCount: 2,
-        //   ),
-        //   itemCount: products.length,
-        //   itemBuilder: (context, index) {
-        //     return Card(
-        //       child: InkWell(
-        //         onTap: () {
-        //           Navigator.of(context).push(
-        //             MaterialPageRoute(
-        //               builder: (context) => ProductPage(index),
-        //             ),
-        //           );
-        //         },
-        //         child: Center(
-        //           child: Stack(
-        //             children: <Widget>[
-        //               Image.asset(
-        //                 products[index].imagePath,
-        //               ),
-        //               Column(
-        //                 children: <Widget>[
-        //                   SizedBox(
-        //                     height: 150,
-        //                   ),
-        //                   Text(
-        //                     products[index].name,
-        //                     textAlign: TextAlign.right,
-        //                   )
-        //                 ],
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //       ),
-        //     );
-        //   },
-        // ),
-        //),
       ),
     );
   }
 }
 
 class _Tile extends StatelessWidget {
-  double cardWidth;
   double titleSpacing = 5.0;
-  _Tile(this.product);
+  _Tile(this.index);
 
-  final Product product;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
+    Product product = Provider.of<List<Product>>(context)[index];
     return Card(
-      //cardWidth = context.size.width
-      child: Stack(
-        overflow: Overflow.clip,
-        children: <Widget>[
-          //new Center(child: new CircularProgressIndicator(),),
-          Center(
-            child: FadeInImage.memoryNetwork(
-              placeholder: kTransparentImage,
-              image: product.imagePath,
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ProductPage(index),
             ),
-          ),
-          Positioned(
-            bottom: titleSpacing,
-            right: titleSpacing,
-            left: titleSpacing,
-            child: Container(
-              width: cardWidth,
-              child: Text(
-                product.name,
-                textAlign: TextAlign.right,
-                style: const TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                  backgroundColor: Colors.black54,
-                  color: Colors.white,
+          );
+        },
+        child: Stack(
+          overflow: Overflow.clip,
+          children: <Widget>[
+            //new Center(child: new CircularProgressIndicator(),),
+            Center(
+              child: FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                image: product.imagePath,
+              ),
+            ),
+            Positioned(
+              bottom: titleSpacing,
+              right: titleSpacing,
+              left: titleSpacing,
+              child: Container(
+                child: Text(
+                  product.name,
+                  textAlign: TextAlign.right,
+                  style: const TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                    backgroundColor: Colors.black54,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

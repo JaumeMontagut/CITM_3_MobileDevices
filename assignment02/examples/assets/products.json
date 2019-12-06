@@ -16,7 +16,7 @@
         },
         {
             "name": "I have a legal firearm suit",
-            "description": "Firearm not included. Now you have your perfect suit to walk through the streets with your firearm.",
+            "description": "Now you have your perfect suit to walk through the streets with your firearm.\nNote: Firearm not included.",
             "location": "New Lane 129, CA",
             "sizes": [
                 31.0,
@@ -61,7 +61,7 @@
         },
         {
             "name": "Cowboy suit",
-            "description": "The perfect pose requires the perfect suit tu impres your lover.",
+            "description": "Now you can recreate your fantasy of being a cowboy from the good ol' days. Includes an appointment with a psychiatrist.",
             "location": "New Lane 129, CA",
             "sizes": [
                 31.0,
@@ -73,6 +73,110 @@
             "price": 80,
             "imagePath": "https://images.jg-cdn.com/image/34ead955-c8eb-460f-9dd2-761c8365c102.jpg?template=size1200x630face",
             "onCart": false
+        },
+        {
+            "name": "Flexibility suit",
+            "description": "Perfect for stretching. This suit allows you to bend your body in even weirder ways that you've been doing it.",
+            "location": "New Lane 129, CA",
+            "sizes": [
+                31.0,
+                32.0,
+                33.0,
+                34.0,
+                35.0
+            ],
+            "price": 80,
+            "imagePath": "https://farm5.static.flickr.com/4506/37779065641_48a12d5c3a_b.jpg",
+            "onCart": false
+        },
+        {
+            "name": "Masculine overdose suit",
+            "description": "From the creators of 'I have a legal firearm suit' comes this work of art that also emphasizes your masculine beard, tatoos and beard.",
+            "location": "New Lane 129, CA",
+            "sizes": [
+                31.0,
+                32.0,
+                33.0,
+                34.0,
+                35.0
+            ],
+            "price": 80,
+            "imagePath": "https://i.pinimg.com/736x/43/77/7d/43777d31af0e14781d3e2bfcad6fa5e4.jpg",
+            "onCart": false
+        },
+        {
+            "name": "Flying suit",
+            "description": "Ever dreamed of taking to the skies? well, now you can't and you will never be able to.\nBut with these hallucinatory googles made of our special secret plants, you'll be transported to the skies in no time!.",
+            "location": "New Lane 129, CA",
+            "sizes": [
+                31.0,
+                32.0,
+                33.0,
+                34.0,
+                35.0
+            ],
+            "price": 80,
+            "imagePath": "https://thumbs.dreamstime.com/b/i-believe-i-can-touch-sky-13375415.jpg",
+            "onCart": false
+        },
+        {
+            "name": "Real flying suit",
+            "description": "Well, just because you've asked this one allows you to fly. Caution: Landing technlogy not included.",
+            "location": "New Lane 129, CA",
+            "sizes": [
+                31.0,
+                32.0,
+                33.0,
+                34.0,
+                35.0
+            ],
+            "price": 80,
+            "imagePath": "https://i.pinimg.com/236x/3d/54/a5/3d54a5333a1f2f55580492d5151417c9---year-old-cincinnati.jpg",
+            "onCart": false
+        },
+        {
+            "name": "Caught in fraganti suit",
+            "description": "The perfect suit to put when you caught someone. Make sure they don't move while you go to the bathroom and put it though, some ventilators are also nice to increase the dramatic effect.",
+            "location": "New Lane 129, CA",
+            "sizes": [
+                31.0,
+                32.0,
+                33.0,
+                34.0,
+                35.0
+            ],
+            "price": 80,
+            "imagePath": "https://i.pinimg.com/originals/cf/3a/79/cf3a79982776ebe28e9c371a1972527c.jpg",
+            "onCart": false
+        },
+        {
+            "name": "Really surprised suit",
+            "description": "You can put this suit on to fake your surprise when you find out you've failed an subject in which didn't come to class even once.",
+            "location": "New Lane 129, CA",
+            "sizes": [
+                31.0,
+                32.0,
+                33.0,
+                34.0,
+                35.0
+            ],
+            "price": 80,
+            "imagePath": "https://us.123rf.com/450wm/elwynn/elwynn1601/elwynn160100868/52821564-asian-business-man-surprised-with-outrageously-and-funny-pose-full-length-portrait-isolated.jpg?ver=6",
+            "onCart": false
+        },
+        {
+            "name": "The no suit",
+            "description": "Show your discontent with modern society by weaing the 'no suit'. With it you can demonstrate how much you hate capitalsim and exploitative companies which take profit of their customers. Now for a special price of 1000 $.",
+            "location": "New Lane 129, CA",
+            "sizes": [
+                31.0,
+                32.0,
+                33.0,
+                34.0,
+                35.0
+            ],
+            "price": 1000,
+            "imagePath": "https://www.homeose.fr/54162-thickbox_default/armored-briefs-in-the-rubber-look-codpiece-removable-zippered-rear-black.jpg",
+            "onCart": false
         }
-        
     ]

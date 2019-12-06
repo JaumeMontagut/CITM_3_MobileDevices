@@ -7,8 +7,8 @@ import 'package:examples/Widgets/productPage/customBackButton.dart';
 
 
 class ProductPage extends StatefulWidget {
-  final int index;
   ProductPage(this.index);
+  final int index;
 
   @override
   _ProductPageState createState() => _ProductPageState();
@@ -28,7 +28,7 @@ class _ProductPageState extends State<ProductPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Image.asset(
+          Image.network(
             product.imagePath,
             height: double.infinity,
             width: double.infinity,

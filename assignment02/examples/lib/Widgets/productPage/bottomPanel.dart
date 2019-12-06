@@ -103,90 +103,102 @@ class BottomPanel extends StatelessWidget {
           SizedBox(
             height: 25,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: paddingSize),
-            child: Container(
-              width: 100,
-              height: 50,
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Expanded(
-                    flex: 35,
-                    child: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.attach_money,
-                            size: 13,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            product.price.toString(),
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[300],
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          bottomLeft: Radius.circular(15),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 65,
-                    child: Container(
-                      padding: EdgeInsets.all(
-                        8.0,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Text(
-                            "Add To Cart",
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 12,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[700],
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(15),
-                          bottomRight: Radius.circular(15),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          AddToCart(paddingSize, product),
           SizedBox(
             height: 25,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class AddToCart extends StatelessWidget {
+  const AddToCart(this.paddingSize, this.product);
+
+  final double paddingSize;
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: paddingSize),
+      child: Container(
+        width: 100,
+        height: 50,
+        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              flex: 35,
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.attach_money,
+                      size: 13,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      product.price.toString(),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.blue[300],
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    bottomLeft: Radius.circular(15),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 65,
+              child: Container(
+                padding: EdgeInsets.all(
+                  8.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Text(
+                      "Add To Cart",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 12,
+                      color: Colors.white,
+                    )
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.blue[700],
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

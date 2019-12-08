@@ -54,7 +54,7 @@ class CartPage extends StatelessWidget {
         return Dismissible(
           onDismissed: (direction) {
             productsInCart.removeElement(index);
-            //widgets.removeAt(index);
+            productsInCart.saveProductsInCart();
           },
           background: Container(color: Colors.red),
           key: UniqueKey(),

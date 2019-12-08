@@ -30,44 +30,37 @@ class ShopApp extends StatelessWidget {
     );
   }
 
-  bool _loadProducts() {
-    bool loadedProducts = false;
-    FutureBuilder(
+  Widget _loadProducts() {
+    return FutureBuilder(
       future: rootBundle.loadString('assets/products.json'),
       builder: (context, AsyncSnapshot<String> snapshot) {
-        loadedProducts = snapshot.hasData;
+        if (!snapshot.hasData) {
+          return Center(child: CircularProgressIndicator(),);
+        }
         List json = jsonDecode(snapshot.data);
         _products = json.map((elem) => Product.fromJson(elem)).toList();
-        return Container();//Builder needs to returna  widget, so we're returning an empty container
-      },
+        return _body();
+      }
     );
-    return loadedProducts;
   }
 
-  bool _loadProductsInCart() {
-    bool loadedProductsInCart = false;
-    FutureBuilder(
+    Widget _loadProductsInCart() {
+    return FutureBuilder(
       future: rootBundle.loadString('assets/productsInCart.json'),
       builder: (context, AsyncSnapshot<String> snapshot) {
-        loadedProductsInCart = snapshot.hasData;
+        if (!snapshot.hasData) {
+          return Center(child: CircularProgressIndicator(),);
+        }
         List json = jsonDecode(snapshot.data);
         _productsInCartIndices.indices = json.map((elem) => _productsInCartIndices.addElement(elem)).toList();
-        return Container();//Builder needs to returna  widget, so we're returning an empty container
-      },
+        return _body();
+      }
     );
-    return loadedProductsInCart;
   }
+
 
   @override
   Widget build(BuildContext context) {
-    bool loadingProducts = _loadProducts();
-    bool loadingProductsInCart = _loadProductsInCart();
-    if (loadingProducts || loadingProductsInCart) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    } else {
-      return _body();
-    }
+    return _loadProducts();
   }
 }

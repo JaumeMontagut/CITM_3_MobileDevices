@@ -8,6 +8,39 @@ class CartPage extends StatelessWidget {
   final int column1Space = 20;
   final int column2Space = 20;
 
+  Widget _totalPrice(double totalPrice){
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+        child: Container(
+          padding: EdgeInsets.all(8),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 7,
+                child: Text(
+                  'TOTAL:',
+                  style: CustomTextStyle.title01Style(),
+                ),
+              ),
+              Expanded(
+                flex: 3,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Icon(Icons.attach_money, color: Colors.grey[850]),
+                    Text(
+                      totalPrice.toString(),
+                      style: CustomTextStyle.title01Style(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+  }
+
   List<Widget> _products(BuildContext context) {
     ProductsInCart productsInCart = Provider.of<ProductsInCart>(context);
     List<Product> products = Provider.of<List<Product>>(context);
@@ -61,38 +94,7 @@ class CartPage extends StatelessWidget {
         );
       },
     );
-    widgets.add(
-      Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-        child: Container(
-          padding: EdgeInsets.all(8),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 7,
-                child: Text(
-                  'TOTAL:',
-                  style: CustomTextStyle.title01Style(),
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Icon(Icons.attach_money, color: Colors.grey[850]),
-                    Text(
-                      totalPrice.toString(),
-                      style: CustomTextStyle.title01Style(),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    widgets.add(_totalPrice(totalPrice));
     return widgets;
   }
 

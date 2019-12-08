@@ -41,16 +41,73 @@ class CartPage extends StatelessWidget {
     );
   }
 
-  
-
-  @override
-  Widget build(BuildContext context) {
+  List<Widget> _cartAndTotal(BuildContext context) {
     ProductsInCart productsInCart = Provider.of<ProductsInCart>(context);
     List<Product> products = Provider.of<List<Product>>(context);
     double totalPrice = 0.0;
     for (var index in productsInCart.indices) {
       totalPrice += products[index].price;
     }
+    List<Widget> widgets = List.generate(
+      productsInCart.numberOfItems(),
+      (index) {
+        return Dismissible(
+          onDismissed: (direction) {
+            productsInCart.removeElement(index);
+            //widgets.removeAt(index);
+          },
+          background: Container(color: Colors.red),
+          key: UniqueKey(),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              padding: EdgeInsets.all(8),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 7,
+                    child: Text(
+                      products[productsInCart.indices[index]].name,
+                      style: CustomTextStyle.cartTextStyle(),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Icon(
+                          Icons.attach_money,
+                          color: Colors.white,
+                        ),
+                        Text(
+                          products[productsInCart.indices[index]]
+                              .price
+                              .toString(),
+                          style: CustomTextStyle.cartTextStyle(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+    widgets.add(_totalPrice(totalPrice));
+    return widgets;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Cart'),
@@ -58,60 +115,7 @@ class CartPage extends StatelessWidget {
       body: Center(
         child: Scrollbar(
           child: ListView(
-            children: List.generate(
-              productsInCart.numberOfItems(),
-              (index) {
-                return Dismissible(
-                  onDismissed: (direction) {
-                    productsInCart.removeElement(index);
-                    //widgets.removeAt(index);
-                  },
-                  background: Container(color: Colors.red),
-                  key: UniqueKey(),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      padding: EdgeInsets.all(8),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 7,
-                            child: Text(
-                              products[productsInCart.indices[index]].name,
-                              style: CustomTextStyle.cartTextStyle(),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.attach_money,
-                                  color: Colors.white,
-                                ),
-                                Text(
-                                  products[productsInCart.indices[index]]
-                                      .price
-                                      .toString(),
-                                  style: CustomTextStyle.cartTextStyle(),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
+            children: _cartAndTotal(context),
           ),
         ),
       ),

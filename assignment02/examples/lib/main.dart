@@ -10,9 +10,21 @@ void main() {
   runApp(ShopApp());
 }
 
-class ShopApp extends StatelessWidget {
+class ShopApp extends StatefulWidget {
+  @override
+  _ShopAppState createState() => _ShopAppState();
+}
+
+class _ShopAppState extends State<ShopApp> {
   List<Product> _products = [];
   ProductsInCart _productsInCartIndices = ProductsInCart();
+
+  @override
+  void initState()
+  {
+    _productsInCartIndices.loadProductsInCart();
+    super.initState();
+  }
 
   Widget _body() {
     return MultiProvider(
@@ -39,16 +51,10 @@ class ShopApp extends StatelessWidget {
         }
         List json = jsonDecode(snapshot.data);
         _products = json.map((elem) => Product.fromJson(elem)).toList();
-        return _loadProductsInCart();
+        return _body();
       }
     );
   }
-
-  Widget _loadProductsInCart ()
-  {
-    File file = _productsInCartIndices.createPath();
-  }
-
 
   @override
   Widget build(BuildContext context) {

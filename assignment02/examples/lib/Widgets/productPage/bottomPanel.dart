@@ -126,9 +126,10 @@ class AddToCart extends StatelessWidget {
     ProductsInCart productsInCart = Provider.of<ProductsInCart>(context, listen: false);
     //Add the element
     productsInCart.addElement(index);
+
+    //TODO: Make this a function of productsInCart
     //Save data
-    Directory dir = await getApplicationDocumentsDirectory();
-    File file = File('${dir.path}/productsInCart.json');
+    File file = File(productsInCart.path);
     Map<String,dynamic> elements = Map<String,dynamic>();
     elements['productsInCart'] = productsInCart.indices;
     var json = jsonEncode(elements);

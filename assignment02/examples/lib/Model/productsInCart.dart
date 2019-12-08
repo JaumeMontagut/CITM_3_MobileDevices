@@ -18,7 +18,7 @@ class ProductsInCart with ChangeNotifier {
   }
 
 //TODO: Join the functions into one
-  void get loadProductsInCart async 
+  get loadProductsInCart async 
   {
     File file = await localFile;
     String fileContents = await file.readAsString();

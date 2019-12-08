@@ -41,10 +41,7 @@ class CartPage extends StatelessWidget {
     );
   }
 
-  // List<Widget> _products(BuildContext context) {
-  //   widgets.add(_totalPrice(totalPrice));
-  //   return widgets;
-  // }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -60,59 +57,61 @@ class CartPage extends StatelessWidget {
       ),
       body: Center(
         child: Scrollbar(
-          child: ListView.builder(
-            itemCount: productsInCart.numberOfItems(),
-            itemBuilder: (context, i) {
-              return Dismissible(
-                onDismissed: (direction) {
-                  productsInCart.removeElement(i);
-                  //widgets.removeAt(index);
-                },
-                background: Container(color: Colors.red),
-                key: UniqueKey(),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+          child: ListView(
+            children: List.generate(
+              productsInCart.numberOfItems(),
+              (index) {
+                return Dismissible(
+                  onDismissed: (direction) {
+                    productsInCart.removeElement(index);
+                    //widgets.removeAt(index);
+                  },
+                  background: Container(color: Colors.red),
+                  key: UniqueKey(),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                      padding: EdgeInsets.all(8),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            flex: 7,
+                            child: Text(
+                              products[productsInCart.indices[index]].name,
+                              style: CustomTextStyle.cartTextStyle(),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.attach_money,
+                                  color: Colors.white,
+                                ),
+                                Text(
+                                  products[productsInCart.indices[index]]
+                                      .price
+                                      .toString(),
+                                  style: CustomTextStyle.cartTextStyle(),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    padding: EdgeInsets.all(8),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 7,
-                          child: Text(
-                            products[productsInCart.indices[i]].name,
-                            style: CustomTextStyle.cartTextStyle(),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Icon(
-                                Icons.attach_money,
-                                color: Colors.white,
-                              ),
-                              Text(
-                                products[productsInCart.indices[i]]
-                                    .price
-                                    .toString(),
-                                style: CustomTextStyle.cartTextStyle(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ),

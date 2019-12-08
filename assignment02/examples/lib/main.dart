@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:provider/provider.dart';
 import 'package:examples/Pages/selectProductPage.dart';
+import 'Model/productsInCart.dart';
 
 void main() {
   runApp(ShopApp());
@@ -11,34 +12,62 @@ void main() {
 
 class ShopApp extends StatelessWidget {
   List<Product> _products = [];
-  int currIndex = 0; //The index of the current product
-  //TODO: Make the "Select product page" the main page
+  ProductsInCart _productsInCartIndices;
 
   Widget _body() {
-    return Provider<List<Product>>.value(
-      value: _products,
+    return MultiProvider(
+      providers: [
+        Provider<List<Product>>.value(
+          value: _products,
+        ),
+        Provider<ProductsInCart>.value(
+          value: _productsInCartIndices,
+        ),
+      ],
       child: MaterialApp(
         home: SelectProductPage(_products.length),
       ),
     );
   }
 
-  Widget _loadProducts() {
-    return FutureBuilder(
+  bool _loadProducts() {
+    bool loadedProducts = false;
+    FutureBuilder(
       future: rootBundle.loadString('assets/products.json'),
       builder: (context, AsyncSnapshot<String> snapshot) {
-        if (!snapshot.hasData) {
-          return Center(child: CircularProgressIndicator());
-        }
+        loadedProducts = snapshot.hasData;
         List json = jsonDecode(snapshot.data);
         _products = json.map((elem) => Product.fromJson(elem)).toList();
-        return _body();
+        return Container();//Builder needs to returna  widget, so we're returning an empty container
       },
     );
+    return loadedProducts;
+  }
+
+  bool _loadProductsInCart() {
+    bool loadedProductsInCart = false;
+    FutureBuilder(
+      future: rootBundle.loadString('assets/productsInCart.json'),
+      builder: (context, AsyncSnapshot<String> snapshot) {
+        loadedProductsInCart = snapshot.hasData;
+        List json = jsonDecode(snapshot.data);
+        _productsInCartIndices.indices = json.map((elem) => _productsInCartIndices.addElement(elem)).toList();
+        return Container();//Builder needs to returna  widget, so we're returning an empty container
+      },
+    );
+    return loadedProductsInCart;
   }
 
   @override
   Widget build(BuildContext context) {
-    return _loadProducts();
+    bool loadingProducts = _loadProducts();
+    bool loadingProductsInCart = _loadProductsInCart();
+    if (loadingProducts || loadingProductsInCart) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      return _body();
+    }
   }
 }

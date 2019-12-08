@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:examples/Model/product.dart';
 import 'package:examples/Helpers/TextStyles.dart';
 import 'package:examples/Widgets/productPage/clothesSizes.dart';
+import 'dart:io';
+import 'dart:convert';
 
 class BottomPanel extends StatelessWidget {
   static const double paddingSize = 20;
@@ -118,13 +121,21 @@ class BottomPanel extends StatelessWidget {
 class AddToCart extends StatelessWidget {
   final int index;
 
+  Future<void> _writeCart(BuildContext context) async
+  {
+    Directory dir = await getApplicationDocumentsDirectory();
+    File file = File('${dir.path}/productsInCart.json');
+    var json = jsonEncode(Provider.of<List<int>>(context));
+    await file.writeAsString(json);
+  }
+
   AddToCart(this.index);
 
   @override
   Widget build(BuildContext context) {
     Product product = Provider.of<List<Product>>(context)[index];
     return FlatButton(
-      onPressed: () => ,//TODO: Add to cart
+      onPressed: () => _writeCart(context),
       child: Container(
         width: 100,
         height: 50,

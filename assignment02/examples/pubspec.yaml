@@ -26,6 +26,7 @@ flutter:
   assets:
     - 'assets/images/clothes.png'
     - 'assets/products.json'
+    - 'assets/productsInCart.json'
 
   fonts:
     - family: Poppins

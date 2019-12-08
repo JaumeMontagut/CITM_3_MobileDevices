@@ -1,3 +1,4 @@
+import 'package:examples/Model/productsInCart.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -121,11 +122,16 @@ class BottomPanel extends StatelessWidget {
 class AddToCart extends StatelessWidget {
   final int index;
 
-  Future<void> _writeCart(BuildContext context) async
-  {
+  Future<void> _writeCart(BuildContext context) async {
+    ProductsInCart productsInCart = Provider.of<ProductsInCart>(context, listen: false);
+    //Add the element
+    productsInCart.addElement(index);
+    //Save data
     Directory dir = await getApplicationDocumentsDirectory();
     File file = File('${dir.path}/productsInCart.json');
-    var json = jsonEncode(Provider.of<List<int>>(context));
+    Map<String,dynamic> elements = Map<String,dynamic>();
+    elements['productsInCart'] = productsInCart.indices;
+    var json = jsonEncode(elements);
     await file.writeAsString(json);
   }
 
@@ -134,12 +140,12 @@ class AddToCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Product product = Provider.of<List<Product>>(context)[index];
-    return FlatButton(
-      onPressed: () => _writeCart(context),
-      child: Container(
-        width: 100,
-        height: 50,
-        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
+    return Container(
+      width: 100,
+      height: 50,
+      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
+      child: FlatButton(//TODO: Investigate why this reduces the size of the container
+        onPressed: () => _writeCart(context),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[

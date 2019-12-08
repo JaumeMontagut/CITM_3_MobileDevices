@@ -1,15 +1,12 @@
+import 'package:examples/Model/productsInCart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ShoppingCart extends StatelessWidget {
-  const ShoppingCart({
-    Key key,
-    @required this.itemsOnShoppingCart,
-  }) : super(key: key);
-
-  final int itemsOnShoppingCart;
 
   @override
   Widget build(BuildContext context) {
+    int numberOfItems = Provider.of<ProductsInCart>(context).numberOfItems();
     return Positioned(
       top: 35,
       right: 20,
@@ -34,7 +31,7 @@ class ShoppingCart extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  itemsOnShoppingCart.toString(),
+                  numberOfItems.toString(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Poppins',

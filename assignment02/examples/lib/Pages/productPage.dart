@@ -15,7 +15,6 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
-  final int itemsOnShoppingCart = 3;
 
   @override
   void initState() {
@@ -43,7 +42,7 @@ class _ProductPageState extends State<ProductPage> {
             ],
           ),
           CustomBackButton(),
-          ShoppingCart(itemsOnShoppingCart: itemsOnShoppingCart)
+          ShoppingCart()
         ],
       ),
     );

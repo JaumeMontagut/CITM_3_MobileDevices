@@ -12,7 +12,7 @@ void main() {
 
 class ShopApp extends StatelessWidget {
   List<Product> _products = [];
-  ProductsInCart _productsInCartIndices;
+  ProductsInCart _productsInCartIndices = ProductsInCart();
 
   Widget _body() {
     return MultiProvider(
@@ -20,7 +20,7 @@ class ShopApp extends StatelessWidget {
         Provider<List<Product>>.value(
           value: _products,
         ),
-        Provider<ProductsInCart>.value(
+        ChangeNotifierProvider<ProductsInCart>.value(
           value: _productsInCartIndices,
         ),
       ],
@@ -39,23 +39,14 @@ class ShopApp extends StatelessWidget {
         }
         List json = jsonDecode(snapshot.data);
         _products = json.map((elem) => Product.fromJson(elem)).toList();
-        return _body();
+        return _loadProductsInCart();
       }
     );
   }
 
-    Widget _loadProductsInCart() {
-    return FutureBuilder(
-      future: rootBundle.loadString('assets/productsInCart.json'),
-      builder: (context, AsyncSnapshot<String> snapshot) {
-        if (!snapshot.hasData) {
-          return Center(child: CircularProgressIndicator(),);
-        }
-        List json = jsonDecode(snapshot.data);
-        _productsInCartIndices.indices = json.map((elem) => _productsInCartIndices.addElement(elem)).toList();
-        return _body();
-      }
-    );
+  Widget _loadProductsInCart ()
+  {
+    File file = _productsInCartIndices.createPath();
   }
 
 

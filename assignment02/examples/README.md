@@ -6,3 +6,4 @@
 - Staggered grid.
 - List view.
 - Images loaded from URLS.
+- Unique description for each product.

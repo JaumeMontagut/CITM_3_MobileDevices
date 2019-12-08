@@ -13,10 +13,13 @@ class ProductsInCart with ChangeNotifier {
       path = '${folderDir.path}/productsInCart.json';
       final File file = File(path);
       final String fileContents = await file.readAsString();
-      final dynamic json = jsonDecode(fileContents);
-      if (json.length > 0) {
-        indices = json['productsInCart'].cast<int>();
+      final List json = jsonDecode(fileContents);
+      for (var elem in json){
+        indices.add(elem);
       }
+      // if (json.length > 0) {
+      //   indices = json['productsInCart'].cast<int>();
+      // }
     } catch (e) {
       print("ERROR: Error while reading the file.");
       indices = [];

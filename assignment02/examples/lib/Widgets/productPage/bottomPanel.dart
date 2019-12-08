@@ -122,20 +122,6 @@ class BottomPanel extends StatelessWidget {
 class AddToCart extends StatelessWidget {
   final int index;
 
-  Future<void> _writeCart(BuildContext context) async {
-    ProductsInCart productsInCart = Provider.of<ProductsInCart>(context, listen: false);
-    //Add the element
-    productsInCart.addElement(index);
-
-    //TODO: Make this a function of productsInCart
-    //Save data
-    File file = File(productsInCart.path);
-    Map<String,dynamic> elements = Map<String,dynamic>();
-    elements['productsInCart'] = productsInCart.indices;
-    var json = jsonEncode(elements);
-    await file.writeAsString(json);
-  }
-
   AddToCart(this.index);
 
   @override
@@ -145,8 +131,13 @@ class AddToCart extends StatelessWidget {
       width: 100,
       height: 50,
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
-      child: FlatButton(//TODO: Investigate why this reduces the size of the container
-        onPressed: () => _writeCart(context),
+      child: InkWell(
+        onTap: () {
+          ProductsInCart productsInCart =
+              Provider.of<ProductsInCart>(context, listen: false);
+          productsInCart.addElement(index);
+          productsInCart.saveProductsInCart();
+        },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[

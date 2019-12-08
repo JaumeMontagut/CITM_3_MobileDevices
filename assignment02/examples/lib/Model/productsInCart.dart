@@ -23,6 +23,12 @@ class ProductsInCart with ChangeNotifier {
     }
   }
 
+  Future<void> saveProductsInCart () async{
+    final File file = File(path);
+    final dynamic json = jsonEncode(indices);
+    await file.writeAsString(json); 
+  }
+
   int addElement(int index) {
     indices.add(index);
     notifyListeners();

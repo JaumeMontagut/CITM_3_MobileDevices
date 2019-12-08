@@ -42,4 +42,13 @@ class CustomTextStyle {
       color: Colors.grey[600],
     );
   }
+
+  static TextStyle cartTextStyle() {
+    return TextStyle(
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.bold,
+      fontSize: 17,
+      color: Colors.white,
+    );
+  }
 }

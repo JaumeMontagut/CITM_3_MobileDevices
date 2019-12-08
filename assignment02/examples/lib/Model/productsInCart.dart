@@ -17,9 +17,6 @@ class ProductsInCart with ChangeNotifier {
       for (var elem in json){
         indices.add(elem);
       }
-      // if (json.length > 0) {
-      //   indices = json['productsInCart'].cast<int>();
-      // }
     } catch (e) {
       print("ERROR: Error while reading the file.");
       indices = [];

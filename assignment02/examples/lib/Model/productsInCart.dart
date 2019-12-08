@@ -7,25 +7,19 @@ class ProductsInCart with ChangeNotifier {
   List<int> indices = [];
   String path;
 
-  ProductsInCart(){
-    loadProductsInCart();
-  }
-
-  Future<File> get localFile async {
-    final Directory folderDir = await getApplicationDocumentsDirectory();
-    path = '${folderDir.path}/productsInCart.json';
-    return File(path);
-  }
-
-//TODO: Join the functions into one
-  get loadProductsInCart async 
-  {
-    File file = await localFile;
-    String fileContents = await file.readAsString();
-    final json = jsonDecode(fileContents);
-    if (json.length > 0) {
-      Map<String, dynamic> jsonItem = json[0];
-      indices = jsonItem['productsInCart'].cast<int>();
+  Future<void> loadProductsInCart() async {
+    try {
+      final Directory folderDir = await getApplicationDocumentsDirectory();
+      path = '${folderDir.path}/productsInCart.json';
+      final File file = File(path);
+      final String fileContents = await file.readAsString();
+      final dynamic json = jsonDecode(fileContents);
+      if (json.length > 0) {
+        indices = json['productsInCart'].cast<int>();
+      }
+    } catch (e) {
+      print("ERROR: Error while reading the file.");
+      indices = [];
     }
   }
 

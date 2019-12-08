@@ -36,7 +36,7 @@ class ProductsInCart with ChangeNotifier {
   }
 
   void removeElement(int index) {
-    indices.removeWhere((item) => item == index);
+    indices.removeAt(index);
     notifyListeners();
   }
 

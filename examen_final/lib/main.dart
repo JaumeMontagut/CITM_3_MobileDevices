@@ -16,11 +16,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     Key key,
   }) : super(key: key);
 
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   void _deleteUser(User currUser) {
     Firestore.instance.collection('users').document(currUser.id).delete();
   }
@@ -81,11 +86,22 @@ class HomePage extends StatelessWidget {
                   secondaryBackground: Container(
                     color: Colors.green,
                   ),
+                  confirmDismiss: (direction) async {
+                    if(direction == DismissDirection.endToStart){
+                      _editUser(context, currUser);
+                      return false;
+                    }
+                    return true;
+                  },
                   onDismissed: (direction) {
                     if (direction == DismissDirection.startToEnd) {
                       _deleteUser(currUser);
+                      // setState(() {
+                      //   snapshot.data.removeAt(index);
+                      // });
                     } else if (direction == DismissDirection.endToStart) {
-                      _editUser(context, currUser);
+                      
+                      snapshot.data.add(currUser);
                     }
                   },
                   key: ValueKey(currUser.id),

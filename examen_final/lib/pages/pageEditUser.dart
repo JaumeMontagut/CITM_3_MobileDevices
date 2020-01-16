@@ -53,29 +53,45 @@ class _PageEditUserState extends State<PageEditUser> {
           ),
         ],
       ),
-      //body: Text('Hello'),
-      body: Column(
-        children: <Widget>[
-          Text('Username'),
-          TextField(
-            controller: _usernameController,
-          ),
-          Text('Full name'),
-          TextField(
-            controller: _fullNameController,
-          ),
-          Text('Admin'),
-          Checkbox(
-            value: _isAdmin,
-            onChanged: (value) {
-              setState(
-                () {
-                  _isAdmin = value;
-                },
-              );
-            },
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            TextField(
+              decoration: InputDecoration(labelText: 'Username'),
+              controller: _usernameController,
+            ),
+            TextField(
+              decoration: InputDecoration(labelText: 'Full Name'),
+              controller: _fullNameController,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: <Widget>[
+                Text(
+                  'Admin',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey[600],
+                  ),
+                ),
+                Checkbox(
+                  value: _isAdmin,
+                  onChanged: (value) {
+                    setState(
+                      () {
+                        _isAdmin = value;
+                      },
+                    );
+                  },
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

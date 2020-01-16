@@ -68,9 +68,7 @@ class HomePage extends StatelessWidget {
                   ),
                   subtitle: Row(
                     children: <Widget>[
-                      Icon(
-                        currUser.isAdmin ? Icons.person : Icons.person_outline,
-                      ),
+                      currUser.isAdmin ? Icon(Icons.star) : Container(),
                       Text(currUser.fullName),
                     ],
                   ),

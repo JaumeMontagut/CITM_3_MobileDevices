@@ -21,6 +21,18 @@ class HomePage extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
+  void _deleteUser(User currUser) {
+    Firestore.instance.collection('users').document(currUser.id).delete();
+  }
+
+  void _editUser(BuildContext context, User currUser) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => PageEditUser(currUser),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,44 +74,53 @@ class HomePage extends StatelessWidget {
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
                 User currUser = snapshot.data[index];
-                return ListTile(
-                  title: Text(
-                    snapshot.data[index].username,
+                return Dismissible(
+                  background: Container(
+                    color: Colors.red,
                   ),
-                  subtitle: Row(
-                    children: <Widget>[
-                      currUser.isAdmin ? Icon(Icons.star) : Container(),
-                      Text(currUser.fullName),
-                    ],
+                  secondaryBackground: Container(
+                    color: Colors.green,
                   ),
-                  trailing: SizedBox(
-                    width: 100,
-                    child: Row(
+                  onDismissed: (direction) {
+                    if (direction == DismissDirection.startToEnd) {
+                      _deleteUser(currUser);
+                    } else if (direction == DismissDirection.endToStart) {
+                      _editUser(context, currUser);
+                    }
+                  },
+                  key: ValueKey(currUser.id),
+                  child: ListTile(
+                    title: Text(
+                      snapshot.data[index].username,
+                    ),
+                    subtitle: Row(
                       children: <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            Icons.mode_edit,
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => PageEditUser(currUser),
-                              ),
-                            );
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.delete,
-                          ),
-                          onPressed: () {
-                            Firestore.instance
-                                .collection('users')
-                                .document(currUser.id)
-                                .delete();
-                          },
-                        ),
+                        currUser.isAdmin ? Icon(Icons.star) : Container(),
+                        Text(currUser.fullName),
                       ],
+                    ),
+                    trailing: SizedBox(
+                      width: 100,
+                      child: Row(
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(
+                              Icons.mode_edit,
+                            ),
+                            onPressed: () {
+                              _editUser(context, currUser);
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.delete,
+                            ),
+                            onPressed: () {
+                              _deleteUser(currUser);
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

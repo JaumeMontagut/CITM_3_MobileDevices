@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.green,
                   ),
                   confirmDismiss: (direction) async {
-                    if(direction == DismissDirection.endToStart){
+                    if (direction == DismissDirection.endToStart) {
                       _editUser(context, currUser);
                       return false;
                     }
@@ -96,12 +96,6 @@ class _HomePageState extends State<HomePage> {
                   onDismissed: (direction) {
                     if (direction == DismissDirection.startToEnd) {
                       _deleteUser(currUser);
-                      // setState(() {
-                      //   snapshot.data.removeAt(index);
-                      // });
-                    } else if (direction == DismissDirection.endToStart) {
-                      
-                      snapshot.data.add(currUser);
                     }
                   },
                   key: ValueKey(currUser.id),

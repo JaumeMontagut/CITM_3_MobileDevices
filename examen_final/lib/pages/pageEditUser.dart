@@ -1,22 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:examen_final/model/user.dart';
 //import 'package:examen_final/db.dart' as db;
 
-class PageNewUser extends StatefulWidget {
+class PageEditUser extends StatefulWidget {
+  PageEditUser(this.currUser);
+  final User currUser;
+
   @override
-  _PageNewUserState createState() => _PageNewUserState();
+  _PageEditUserState createState() => _PageEditUserState();
 }
 
-class _PageNewUserState extends State<PageNewUser> {
+class _PageEditUserState extends State<PageEditUser> {
   TextEditingController _usernameController;
   TextEditingController _fullNameController;
   bool _isAdmin;
-  
+
   @override
   void initState() {
     _usernameController = TextEditingController();
+    _usernameController.text = widget.currUser.username;
     _fullNameController = TextEditingController();
-    _isAdmin = false;
+    _fullNameController.text = widget.currUser.fullName;
+    _isAdmin = widget.currUser.isAdmin;
     super.initState();
   }
 
@@ -29,7 +35,7 @@ class _PageNewUserState extends State<PageNewUser> {
         actions: <Widget>[
           FlatButton(
             onPressed: () {
-              db.collection('users').document().setData(
+              db.collection('users').document(widget.currUser.id).updateData(
                 {
                   'username': _usernameController.text,
                   'fullName': _fullNameController.text,
@@ -69,31 +75,6 @@ class _PageNewUserState extends State<PageNewUser> {
               );
             },
           )
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   crossAxisAlignment: CrossAxisAlignment.stretch,
-          //   children: <Widget>[
-          //     Text('Username:'),
-          //     TextField(controller: _usernameController),
-          //   ],
-          // ),
-          // Row(
-          //   children: <Widget>[
-          //     Text('Full name:'),
-          //     TextField(controller: _fullNameController),
-          //   ],
-          // ),
-          // Row(
-          //   children: <Widget>[
-          //     Text('Admin:'),
-          //     Checkbox(
-          //       value: _isAdmin,
-          //       onChanged: (value) {
-          //         _isAdmin = value;
-          //       },
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     );

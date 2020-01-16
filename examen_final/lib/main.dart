@@ -1,7 +1,9 @@
+import 'package:examen_final/pages/pageEditUser.dart';
 import 'package:examen_final/pages/pageNewUser.dart';
 import 'package:flutter/material.dart';
 import 'db.dart' as db;
 import 'model/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() => runApp(MyApp());
 
@@ -67,9 +69,7 @@ class HomePage extends StatelessWidget {
                   subtitle: Row(
                     children: <Widget>[
                       Icon(
-                        currUser.isAdmin
-                            ? Icons.person
-                            : Icons.person_outline,
+                        currUser.isAdmin ? Icons.person : Icons.person_outline,
                       ),
                       Text(currUser.fullName),
                     ],
@@ -82,13 +82,24 @@ class HomePage extends StatelessWidget {
                           icon: Icon(
                             Icons.mode_edit,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => PageEditUser(currUser),
+                              ),
+                            );
+                          },
                         ),
                         IconButton(
                           icon: Icon(
                             Icons.delete,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Firestore.instance
+                                .collection('users')
+                                .document(currUser.id)
+                                .delete();
+                          },
                         ),
                       ],
                     ),
